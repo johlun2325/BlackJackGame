@@ -38,6 +38,10 @@ public class GUI extends JFrame {
         this.setVisible(true);
     }
 
+    /*private void setUserNameAndSum(){
+        nameAndSumPanel.add(new JLabel("Namn: ")
+    */
+
     private void addComponents(){
         buttonPanel.add(newCard);
         buttonPanel.add(noMoreCards);
