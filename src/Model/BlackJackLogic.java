@@ -1,5 +1,7 @@
 package Model;
 
+import javax.swing.*;
+
 public class BlackJackLogic {
 
     private DeckOfCards deckOfCards;
@@ -11,15 +13,26 @@ public class BlackJackLogic {
     private int currentCapital;
 
     public BlackJackLogic() {
+        setUserValues();
+        //debug
+        System.out.println(userName);
+        System.out.println(currentCapital);
+
         deckOfCards = new DeckOfCards();
         user = new User(userName, currentCapital);
         house = new House();
 
     }
 
-    public void setUserValues(String name, int startCapital){
-        this.userName = name;
-        this.currentCapital = startCapital;
+
+    public void setUserValues(){
+        userName = JOptionPane.showInputDialog("Enter player name: ");
+        String capital = JOptionPane.showInputDialog("Enter capital: "); //ev kontroll loop här ist.
+        try {
+            currentCapital = Integer.parseInt(capital);
+        } catch (NumberFormatException e) {
+            currentCapital = 1000;
+        }
     }
 
     public String calculateWinner(){

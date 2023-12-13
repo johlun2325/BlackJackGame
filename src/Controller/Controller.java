@@ -3,6 +3,7 @@ package Controller;
 import Model.BlackJackLogic;
 import View.GUI;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +13,12 @@ public class Controller implements ActionListener {
     private GUI gui;
 
     public Controller(){
+        
         logic = new BlackJackLogic();
         gui = new GUI();
+        gui.newGame.addActionListener(this);
+        gui.noMoreCards.addActionListener(this);
+        gui.newCard.addActionListener(this);
     }
 
 
@@ -35,6 +40,7 @@ public class Controller implements ActionListener {
     }
 
     public static void main(String[] args) {
+
         new Controller();
     }
 }
