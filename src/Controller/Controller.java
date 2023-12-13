@@ -9,11 +9,11 @@ import java.awt.event.ActionListener;
 public class Controller implements ActionListener {
 
     private BlackJackLogic logic;
-    private GUI gui = new GUI();
+    private GUI gui;
 
-    public Controller(BlackJackLogic logic, GUI gui){
-        this.logic = logic;
-
+    public Controller(){
+        logic = new BlackJackLogic();
+        gui = new GUI();
     }
 
 
@@ -21,7 +21,20 @@ public class Controller implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         //alla händelser från gui med implementerad logik
+        //todo: lyssnare på field med anv.namn och kapital
+        //todo: knapp med lyssnare för ta emot insats fr anv
 
+        if (e.getSource() == gui.newCard){
+            //draw new card
+        } else if( e.getSource() == gui.noMoreCards){
+            //huset drar och vinnare visas
+        } else if (e.getSource() == gui.newGame){
+            //starta ett nytt spel
+        }
 
+    }
+
+    public static void main(String[] args) {
+        new Controller();
     }
 }

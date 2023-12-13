@@ -7,10 +7,19 @@ public class BlackJackLogic {
     private House house;
     private int currentBet;
 
-    public BlackJackLogic(DeckOfCards deckOfCards, User user, House house) {
-        this.deckOfCards = deckOfCards;
-        this.user = user;
-        this.house = house;
+    private String userName;
+    private int currentCapital;
+
+    public BlackJackLogic() {
+        deckOfCards = new DeckOfCards();
+        user = new User(userName, currentCapital);
+        house = new House();
+
+    }
+
+    public void setUserValues(String name, int startCapital){
+        this.userName = name;
+        this.currentCapital = startCapital;
     }
 
     public String calculateWinner(){
