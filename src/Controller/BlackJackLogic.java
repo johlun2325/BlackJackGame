@@ -168,7 +168,7 @@ public class BlackJackLogic implements ActionListener {
         return winnings;
     }
 
-    public List<Card> getUserCards() {
+    public List<CardInterface> getUserCards() {
         return user.getCurrentHand();
     }
 

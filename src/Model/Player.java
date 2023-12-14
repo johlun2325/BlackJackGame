@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Player {
-    private List<Card> currentHand;
+    private List<CardInterface> currentHand;
 
     public Player() {
         this.currentHand = new ArrayList<>();
@@ -14,14 +14,14 @@ public abstract class Player {
         currentHand.clear();
     }
 
-    public void drawCard(Card card) {
+    public void drawCard(CardInterface card) {
         this.currentHand.add(card);
     }
 
     public int getHandValue() {
         int totalHandValue = 0;
 
-        for (Card card : currentHand) {
+        for (CardInterface card : currentHand) {
             switch (card.getValue()) {
                 case 11, 12, 13 -> totalHandValue += 10;
                 case 14 -> totalHandValue += 11;
@@ -30,7 +30,7 @@ public abstract class Player {
         }
         //checks to see if aces can be used as value 1 instead of 11.
         if (totalHandValue > 21) {
-            for (Card card : currentHand) {
+            for (CardInterface card : currentHand) {
                 switch (card.getValue()) {
                     case 11, 12, 13 -> totalHandValue += 10;
                     case 14 -> totalHandValue += 1;
@@ -44,7 +44,7 @@ public abstract class Player {
 
     }
 
-        public List<Card> getCurrentHand() {
+        public List<CardInterface> getCurrentHand() {
             return currentHand;
         }
     }

@@ -21,58 +21,8 @@ public class Card {
     public void setImage(String path){
         ImageIcon icon = new ImageIcon(path);
         this.cardImage.setIcon(icon);
-        //todo implement method
     }
 
-
-    // endast för debug, remove later:
-    public String type(int type) {
-        String typeString = "";
-        if (type == 0) {
-            typeString = "\u2663";
-            return typeString;
-        } else if (type == 1) {
-            typeString = "\u2666";
-            return typeString;
-        } else if (type == 2) {
-            typeString = "\u2665";
-            return typeString;
-        } else if (type == 3) {
-            typeString = "\u2660";
-            return typeString;
-        }
-        return typeString;
-    }
-
-    public String number(int type) {
-        String typeString = "";
-        if (type == 11) {
-            typeString = "Knekt";
-            return typeString;
-        } else if (type == 12) {
-            typeString = "Dam";
-            return typeString;
-        } else if (type == 13) {
-            typeString = "Kung";
-            return typeString;
-        } else if (type == 14) {
-            typeString = "Ess";
-            return typeString;
-        } else {
-            typeString = "" + type;
-        }
-        return typeString;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Card{" +
-                "suit=" + suit +
-                ", value=" + value +
-                ", cardImage=" + cardImage +
-                '}';
-    }
 
     public int getValue() {
         return value;
