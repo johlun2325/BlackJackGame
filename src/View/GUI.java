@@ -100,7 +100,7 @@ public class GUI extends JFrame {
         newGame = new JButton("New game");
 
         instructions = new JLabel("Här kommer instruktioner");
-        instructions.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        instructions.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
         instructions.setForeground(new Color(255, 200, 0));
         instructions.setHorizontalAlignment(JLabel.CENTER);
 
