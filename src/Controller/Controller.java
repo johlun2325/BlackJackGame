@@ -24,9 +24,8 @@ public class Controller implements ActionListener {
         gui.noMoreCards.addActionListener(this);
         gui.newCard.addActionListener(this);
         logic.dealCardsAtStartOfRound();
-        gui.updateHandImages(getCardImages(logic.getUser()),gui.getUserHandPanel());
-        gui.updateHandImages(getCardImages(logic.getUser()),gui.getHouseHandPanel());
-
+        gui.updateHandImages(getCardImages(logic.getUser()));
+        gui.updateHouseImages(getCardImages(logic.getHouse()));
     }
 
 
@@ -39,7 +38,7 @@ public class Controller implements ActionListener {
 
         if (e.getSource() == gui.newCard){
             logic.userDrawCard();
-            gui.updateHandImages(getCardImages(logic.getUser()),gui.getUserHandPanel());
+            gui.updateHandImages(getCardImages(logic.getUser()));
 
         } else if( e.getSource() == gui.noMoreCards){
             switch (logic.calculateWinner()) {
