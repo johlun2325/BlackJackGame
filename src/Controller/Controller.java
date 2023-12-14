@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Card;
+import Model.CardInterface;
+import Model.DeckOfCards;
 import Model.Player;
 import View.GUI;
 
@@ -68,8 +70,8 @@ public class Controller implements ActionListener {
 
     public List<JLabel> getCardImages(Player player) {
         List<JLabel> cardImages = new ArrayList<>();
-        for (Card card : player.getCurrentHand()) {
-            cardImages.add(card.getCardImage());
+        for (CardInterface card : player.getCurrentHand()) {
+            cardImages.add(card.getImage());
         }
 
         return cardImages;

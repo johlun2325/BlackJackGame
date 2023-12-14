@@ -77,7 +77,7 @@ public class BlackJackLogic {
         return winnings;
     }
 
-    public List<Card> getUserCards() {
+    public List<CardInterface> getUserCards() {
         return user.getCurrentHand();
     }
 
