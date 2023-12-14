@@ -24,7 +24,9 @@ public class Controller implements ActionListener {
         gui.noMoreCards.addActionListener(this);
         gui.newCard.addActionListener(this);
         logic.dealCardsAtStartOfRound();
-        gui.updateUserCards(getCardImages(logic.getUser()));
+        gui.updateHandImages(getCardImages(logic.getUser()),gui.getUserHandPanel());
+        gui.updateHandImages(getCardImages(logic.getUser()),gui.getHouseHandPanel());
+
     }
 
 
@@ -37,13 +39,13 @@ public class Controller implements ActionListener {
 
         if (e.getSource() == gui.newCard){
             logic.userDrawCard();
-            gui.updateUserCards(getCardImages(logic.getUser()));
+            gui.updateHandImages(getCardImages(logic.getUser()),gui.getUserHandPanel());
 
         } else if( e.getSource() == gui.noMoreCards){
             switch (logic.calculateWinner()) {
-                case WIN -> JOptionPane.showMessageDialog(null, "you win  " + logic.payOutWinnings());
-                case LOSE -> JOptionPane.showMessageDialog(null, "you lose  " + logic.payOutWinnings());
-                case DRAW -> JOptionPane.showMessageDialog(null, "you win + " + logic.payOutWinnings());
+                case WIN -> JOptionPane.showMessageDialog(null, "You win: " + logic.payOutWinnings() + "€");
+                case LOSE -> JOptionPane.showMessageDialog(null, "You lose ");
+                case DRAW -> JOptionPane.showMessageDialog(null, "It's a draw!");
 
             }
         } else if (e.getSource() == gui.newGame){
