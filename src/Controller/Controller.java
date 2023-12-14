@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.BlackJackLogic;
 import Model.Card;
 import Model.Player;
 import View.GUI;
@@ -24,8 +23,12 @@ public class Controller implements ActionListener {
         gui.noMoreCards.addActionListener(this);
         gui.newCard.addActionListener(this);
         logic.dealCardsAtStartOfRound();
-        gui.updateHandImages(getCardImages(logic.getUser()));
-        gui.updateHouseImages(getCardImages(logic.getHouse()));
+        updateAllHandImages();
+    }
+
+    public void updateAllHandImages(){
+        gui.updateUserHandImages(getCardImages(logic.getUser()));
+        gui.updateHouseHandImages(getCardImages(logic.getHouse()));
     }
 
 
@@ -38,9 +41,16 @@ public class Controller implements ActionListener {
 
         if (e.getSource() == gui.newCard){
             logic.userDrawCard();
-            gui.updateHandImages(getCardImages(logic.getUser()));
+            gui.updateUserHandImages(getCardImages(logic.getUser()));
 
         } else if( e.getSource() == gui.noMoreCards){
+
+            while(logic.getHouse().getHandValue() < 17){
+                logic.houseDrawCard();
+                gui.removeUpsideDownCard();
+                gui.updateHouseHandImages(getCardImages(logic.getHouse()));
+            }
+
             switch (logic.calculateWinner()) {
                 case WIN -> JOptionPane.showMessageDialog(null, "You win: " + logic.payOutWinnings() + "€");
                 case LOSE -> JOptionPane.showMessageDialog(null, "You lose ");
@@ -48,7 +58,10 @@ public class Controller implements ActionListener {
 
             }
         } else if (e.getSource() == gui.newGame){
-            //starta ett nytt spel
+            gui.newRoundLayout();
+            logic.discardAllHands();
+            logic.dealCardsAtStartOfRound();
+            updateAllHandImages();
         }
 
     }

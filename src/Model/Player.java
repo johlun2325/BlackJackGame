@@ -10,6 +10,10 @@ public abstract class Player {
         this.currentHand = new ArrayList<>();
     }
 
+    public void discardHand(){
+        currentHand.clear();
+    }
+
     public void drawCard(Card card) {
         this.currentHand.add(card);
     }

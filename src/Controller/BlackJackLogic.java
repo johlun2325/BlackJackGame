@@ -1,4 +1,6 @@
-package Model;
+package Controller;
+
+import Model.*;
 
 import javax.swing.*;
 import java.util.List;
@@ -23,6 +25,11 @@ public class BlackJackLogic {
         user = new User(userName, currentCapital);
         house = new House();
 
+    }
+
+    public void discardAllHands(){
+        user.discardHand();
+        house.discardHand();
     }
 
 
@@ -52,6 +59,9 @@ public class BlackJackLogic {
         currentBet = input;
     }
 
+    public void houseDrawCard() {
+        house.drawCard(deckOfCards.dealCard());
+    }
     public void userDrawCard() {
         user.drawCard(deckOfCards.dealCard());
     }
