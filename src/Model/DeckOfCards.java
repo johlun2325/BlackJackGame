@@ -1,36 +1,36 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class DeckOfCards {
 
-    private List<Card> listOfCards = new ArrayList<>();
+    private List<Card> deckOfCards = new ArrayList<>();
 
     public DeckOfCards() {
-        createDeck();
+        createNewDeck();
     }
 
-    public void createDeck(){
+    public void createNewDeck(){
+        deckOfCards.clear();
         for (int i = 0; i < 4; i++) {
             for (int j = 2; j < 15; j++) {
-                Card card = new Card();
-                card.setSuit(i);
-                card.setValue(j);
-                listOfCards.add(card);
+                Card card = new Card(i,j);
+                deckOfCards.add(card);
             }
         }
         ImagePaths imagePaths = new ImagePaths();
         for (int i = 0; i < 52; i++) {
-            listOfCards.get(i).setImage(imagePaths.getImagePath(i));
+            deckOfCards.get(i).setImage(imagePaths.getImagePath(i));
         }
-        Collections.shuffle(listOfCards);
+        Collections.shuffle(deckOfCards);
     }
 
     public Card drawCard(){
-        return listOfCards.get(0); //ändra vid implementation
+        Card tempCard = deckOfCards.get(0);
+        deckOfCards.remove(0);
+        return tempCard;
     }
 
     public void shuffle(){}
