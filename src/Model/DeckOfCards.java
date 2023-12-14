@@ -45,7 +45,7 @@ public class DeckOfCards {
 
         for (int i = 0; i < listOfSuits.size(); i++) {
             for (int j = 0; j < listOfValues.size(); j++) {
-                Card card = factory.createCard(listOfSuits.get(i), j);
+                Card card = factory.createCard(listOfSuits.get(i), listOfValues.get(j));
                 deckOfCards.add(card);
             }
         }

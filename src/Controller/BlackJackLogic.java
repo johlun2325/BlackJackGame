@@ -23,9 +23,6 @@ public class BlackJackLogic implements ActionListener {
 
     public BlackJackLogic() {
         setUserValues();
-        //debug
-        System.out.println(userName);
-        System.out.println(currentCapital);
 
         deckOfCards = new DeckOfCards();
         user = new User(userName, currentCapital);
@@ -70,10 +67,11 @@ public class BlackJackLogic implements ActionListener {
             }
 
         } else if (e.getSource() == gui.noMoreCards) {
-
+            gui.removeUpsideDownCard();
             while (getHouse().getHandValue() < 17 && getHouse().getHandValue() > 0) {
+                System.out.println(getHouse().getHandValue());
+                System.out.println(getHouse().getCurrentHand());
                 houseDrawCard();
-                gui.removeUpsideDownCard();
                 gui.updateHouseHandImages(getCardImages(getHouse()));
 
             }
@@ -111,7 +109,6 @@ public class BlackJackLogic implements ActionListener {
             currentBet = bet;
             user.subractBetFromCapital(bet);
             gui.setTotalCapital(user.getCurrentCapital());
-            System.out.println(currentBet); //debug
         }
         gui.setCurrentBet(currentBet);
     }
