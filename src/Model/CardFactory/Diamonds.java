@@ -1,4 +1,4 @@
-package Model;
+package Model.CardFactory;
 
 import javax.swing.*;
 

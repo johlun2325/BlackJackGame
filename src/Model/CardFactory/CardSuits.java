@@ -1,4 +1,4 @@
-package Model;
+package Model.CardFactory;
 
 public enum CardSuits {
 

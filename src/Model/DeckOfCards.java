@@ -1,5 +1,9 @@
 package Model;
 
+import Model.CardFactory.Card;
+import Model.CardFactory.CardFactory;
+import Model.CardFactory.CardSuits;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.CardFactory.Card;
 import View.GUI;
 
 import javax.swing.*;
