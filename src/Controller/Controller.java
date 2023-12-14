@@ -1,11 +1,15 @@
 package Controller;
 
 import Model.BlackJackLogic;
+import Model.Card;
+import Model.Player;
 import View.GUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller implements ActionListener {
 
@@ -19,6 +23,8 @@ public class Controller implements ActionListener {
         gui.newGame.addActionListener(this);
         gui.noMoreCards.addActionListener(this);
         gui.newCard.addActionListener(this);
+        logic.dealCardsAtStartOfRound();
+        gui.updateUserCards(getCardImages(logic.getUser()));
     }
 
 
@@ -30,13 +36,29 @@ public class Controller implements ActionListener {
         //todo: knapp med lyssnare för ta emot insats fr anv
 
         if (e.getSource() == gui.newCard){
-            //draw new card
+            logic.userDrawCard();
+            gui.updateUserCards(getCardImages(logic.getUser()));
+
         } else if( e.getSource() == gui.noMoreCards){
-            //huset drar och vinnare visas
+            switch (logic.calculateWinner()) {
+                case WIN -> JOptionPane.showMessageDialog(null, "you win  " + logic.payOutWinnings());
+                case LOSE -> JOptionPane.showMessageDialog(null, "you lose  " + logic.payOutWinnings());
+                case DRAW -> JOptionPane.showMessageDialog(null, "you win + " + logic.payOutWinnings());
+
+            }
         } else if (e.getSource() == gui.newGame){
             //starta ett nytt spel
         }
 
+    }
+
+    public List<JLabel> getCardImages(Player player) {
+        List<JLabel> cardImages = new ArrayList<>();
+        for (Card card : player.getCurrentHand()) {
+            cardImages.add(card.getCardImage());
+        }
+
+        return cardImages;
     }
 
     public static void main(String[] args) {

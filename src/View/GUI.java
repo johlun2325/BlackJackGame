@@ -1,7 +1,10 @@
 package View;
 
+import Model.Card;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GUI extends JFrame {
     public JButton newCard;
@@ -17,7 +20,7 @@ public class GUI extends JFrame {
 
     private JPanel deckPanel;
     private JPanel buttonPanel;
-    private JPanel playerHandPanel;
+    protected JPanel userHandPanel;
     private JPanel NPCHandPanel;
     private JPanel scorePanel;
 
@@ -53,7 +56,7 @@ public class GUI extends JFrame {
         scorePanel.add(NPCScoreLabel);
 
         mainPanel.add(BorderLayout.NORTH, buttonPanel);
-        mainPanel.add(BorderLayout.CENTER, playerHandPanel);
+        mainPanel.add(BorderLayout.CENTER, userHandPanel);
         mainPanel.add(BorderLayout.SOUTH, NPCHandPanel);
         mainPanel.add(BorderLayout.WEST, deckPanel);
         mainPanel.add(BorderLayout.EAST, scorePanel);
@@ -72,10 +75,20 @@ public class GUI extends JFrame {
 
         deckPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel = new JPanel();
-        playerHandPanel = new JPanel();
+        userHandPanel = new JPanel();
         NPCHandPanel = new JPanel();
         scorePanel = new JPanel(new GridLayout(2, 1));
         mainPanel = new JPanel(new BorderLayout());
+    }
+    public void updateUserCards(List<JLabel> cardImages) {
+
+        for (JLabel cardImage : cardImages) {
+            userHandPanel.add(cardImage);
+        }
+        revalidate();
+        repaint();
+
+
     }
 
     public static void main(String[] args) {
@@ -83,3 +96,5 @@ public class GUI extends JFrame {
     }
 
 }
+
+

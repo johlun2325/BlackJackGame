@@ -1,12 +1,13 @@
 package Model;
 
 import javax.swing.*;
+import java.util.List;
 
 public class BlackJackLogic {
 
     private DeckOfCards deckOfCards;
-    private  User user;
-    private House house;
+    private final User user;
+    private final House house;
     private int currentBet;
 
     private String userName;
@@ -35,11 +36,46 @@ public class BlackJackLogic {
         }
     }
 
-    public String calculateWinner(){
-        return "";
-    }
-    public void placeBet(){}
-    public void startNewRound(){}
-    private void payOutWinnings(){}
+    public EndOfRound calculateWinner(){
 
+        // TODO indicate to the controller to change the GUI, maybe a popup?
+        if (user.getHandValue() > house.getHandValue()) {
+            payOutWinnings();
+            return EndOfRound.WIN;
+        } else if (user.getHandValue() < house.getHandValue()) {
+            return EndOfRound.LOSE;
+        } else {
+            return EndOfRound.DRAW;
+        }
+    }
+    public void placeBet(int input){
+        currentBet = input;
+    }
+
+    public void userDrawCard() {
+        user.drawCard(deckOfCards.dealCard());
+    }
+    public void dealCardsAtStartOfRound(){
+        user.drawCard(deckOfCards.dealCard());
+        house.drawCard(deckOfCards.dealCard());
+        user.drawCard(deckOfCards.dealCard());
+
+    }
+    public int payOutWinnings(){
+        int winnings = currentBet * 2;
+        user.addToTotalCapital(winnings);
+        return winnings;
+    }
+
+    public List<Card> getUserCards() {
+        return user.getCurrentHand();
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public House getHouse() {
+        return house;
+    }
 }

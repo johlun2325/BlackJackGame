@@ -27,7 +27,7 @@ public class DeckOfCards {
         Collections.shuffle(deckOfCards);
     }
 
-    public Card drawCard(){
+    public Card dealCard(){
         Card tempCard = deckOfCards.get(0);
         deckOfCards.remove(0);
         return tempCard;

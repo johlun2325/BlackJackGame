@@ -94,4 +94,12 @@ public class Card {
                 ", cardImage=" + cardImage +
                 '}';
     }
+
+    public int getValue() {
+        return value;
+    }
+
+    public JLabel getCardImage() {
+        return cardImage;
+    }
 }
