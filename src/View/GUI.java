@@ -14,12 +14,13 @@ public class GUI extends JFrame {
     private JLabel cardBackLabel;
     private JLabel totalCapital;
     private JLabel currentBet;
+    private JLabel instructions;
 
     private JPanel buttonPanel;
     protected JPanel userHandPanel;
     private JPanel houseHandPanel;
     private JPanel betAndCapitalPanel;
-
+    private JPanel centerPanel;
 
     private JPanel mainPanel;
 
@@ -39,10 +40,19 @@ public class GUI extends JFrame {
     }
 
     private void addComponents() {
+        centerPanel.add(buttonPanel);
+        centerPanel.add(instructions);
         buttonPanel.add(newCard);
         buttonPanel.add(noMoreCards);
         buttonPanel.add(newGame);
         buttonPanel.setOpaque(false);
+        centerPanel.setOpaque(false);
+        buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        instructions.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrera instruktionerna
+
+        centerPanel.add(buttonPanel);
+        centerPanel.add(instructions);
+
 
 
 
@@ -58,7 +68,7 @@ public class GUI extends JFrame {
 
 
 //        mainPanel.add(BorderLayout.WEST, deckPanel);
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
         mainPanel.add(houseHandPanel,BorderLayout.NORTH);
         mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
@@ -89,6 +99,11 @@ public class GUI extends JFrame {
         noMoreCards = new JButton("Stop!");
         newGame = new JButton("New game");
 
+        instructions = new JLabel("Här kommer instruktioner");
+        instructions.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+        instructions.setForeground(new Color(255, 200, 0));
+        instructions.setHorizontalAlignment(JLabel.CENTER);
+
         cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
         cardBackLabel = new JLabel(cardBack);
 
@@ -96,9 +111,13 @@ public class GUI extends JFrame {
         currentBet = new JLabel("Current Bet: ");
 
         buttonPanel = new JPanel(new FlowLayout());
+       // buttonPanel.setHorizontalAlignment(JButton.CENTER);
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
         betAndCapitalPanel = new JPanel(new GridLayout(2, 1));
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+
 
         createMainPanel();
 
