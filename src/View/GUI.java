@@ -47,15 +47,17 @@ public class GUI extends JFrame {
         buttonPanel.add(newCard);
         buttonPanel.add(noMoreCards);
         buttonPanel.add(newGame);
+        buttonPanel.add(playerScoreLabel);
+        buttonPanel.add(playerScoreLabel);
 
         deckPanel.add(deckLabel);
         deckPanel.add(numberOfCardsLeftInDeck);
         scorePanel.add(playerScoreLabel);
         scorePanel.add(NPCScoreLabel);
 
-        mainPanel.add(BorderLayout.NORTH, buttonPanel);
-        mainPanel.add(BorderLayout.CENTER, userHandPanel);
-        mainPanel.add(BorderLayout.SOUTH, houseHandPanel);
+        mainPanel.add(BorderLayout.NORTH, houseHandPanel);
+        mainPanel.add(BorderLayout.CENTER, buttonPanel);
+        mainPanel.add(BorderLayout.SOUTH, userHandPanel);
         mainPanel.add(BorderLayout.WEST, deckPanel);
         mainPanel.add(BorderLayout.EAST, scorePanel);
     }
