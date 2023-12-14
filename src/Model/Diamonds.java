@@ -2,7 +2,7 @@ package Model;
 
 import javax.swing.*;
 
-public class Diamonds implements CardInterface{
+public class Diamonds implements Card {
 
     private CardSuits suit;
     private int value;

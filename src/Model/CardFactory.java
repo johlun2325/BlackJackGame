@@ -2,7 +2,7 @@ package Model;
 
 public class CardFactory {
 
-    public CardInterface createCard(CardSuits cardType, int value) {
+    public Card createCard(CardSuits cardType, int value) {
         if (cardType == null) {
             return null;
         }

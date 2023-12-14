@@ -91,7 +91,7 @@ public class BlackJackLogic implements ActionListener {
 
     private void nextRound(){
         if (deckOfCards.getDeckOfCards().size() > 15) {
-            deckOfCards.createNewDeck();
+            deckOfCards.createCardsFromFactory();
         }
         gui.newRoundLayout();
         discardAllHands();
@@ -118,7 +118,7 @@ public class BlackJackLogic implements ActionListener {
     public List<JLabel> getCardImages(Player player) {
         List<JLabel> cardImages = new ArrayList<>();
         for (Card card : player.getCurrentHand()) {
-            cardImages.add(card.getCardImage());
+            cardImages.add(card.getImage());
         }
 
         return cardImages;
@@ -168,7 +168,7 @@ public class BlackJackLogic implements ActionListener {
         return winnings;
     }
 
-    public List<CardInterface> getUserCards() {
+    public List<Card> getUserCards() {
         return user.getCurrentHand();
     }
 

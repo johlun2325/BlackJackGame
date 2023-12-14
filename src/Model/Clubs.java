@@ -2,7 +2,7 @@ package Model;
 
 import javax.swing.*;
 
-public class Clubs implements CardInterface{
+public class Clubs implements Card {
     private CardSuits suit;
     private int value;
     private JLabel cardImage;

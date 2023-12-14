@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DeckOfCards {
 
-    private List<CardInterface> deckOfCards = new ArrayList<>();
+    private List<Card> deckOfCards = new ArrayList<>();
 
     public DeckOfCards() {
         createCardsFromFactory();
@@ -41,7 +41,7 @@ public class DeckOfCards {
 
         for (int i = 0; i < listOfSuits.size(); i++) {
             for (int j = 0; j < listOfValues.size(); j++) {
-                CardInterface card = factory.createCard(listOfSuits.get(i), j);
+                Card card = factory.createCard(listOfSuits.get(i), j);
                 deckOfCards.add(card);
             }
         }
@@ -55,8 +55,8 @@ public class DeckOfCards {
 
     }
 
-    public CardInterface dealCard() {
-        CardInterface tempCard = deckOfCards.get(0);
+    public Card dealCard() {
+        Card tempCard = deckOfCards.get(0);
         deckOfCards.remove(0);
         return tempCard;
     }
@@ -64,7 +64,7 @@ public class DeckOfCards {
     public void shuffle() {
     }
 
-    public List<CardInterface> getDeckOfCards(){
+    public List<Card> getDeckOfCards(){
         return deckOfCards;
     }
 }
