@@ -28,6 +28,7 @@ public abstract class Player {
                 default -> totalHandValue += card.getValue();
             }
         }
+        //checks to see if aces can be used as value 1 instead of 11.
         if (totalHandValue > 21) {
             for (Card card : currentHand) {
                 switch (card.getValue()) {
@@ -37,7 +38,10 @@ public abstract class Player {
                 }
             }
         }
-        return totalHandValue;
+        if (totalHandValue <= 21) {
+            return totalHandValue;
+        } else return -1;
+
     }
 
         public List<Card> getCurrentHand() {

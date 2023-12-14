@@ -34,4 +34,9 @@ public class DeckOfCards {
     }
 
     public void shuffle(){}
+
+    public List<Card> getDeckOfCards() {
+        return deckOfCards;
+    }
 }
+

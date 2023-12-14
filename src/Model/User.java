@@ -13,4 +13,11 @@ public class User extends Player{
         currentCapital += winnings;
     }
 
+    public int getCurrentCapital() {
+        return currentCapital;
+    }
+
+    public void subractBetFromCapital(int bet) {
+        this.currentCapital -= bet;
+    }
 }
