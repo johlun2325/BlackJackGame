@@ -53,9 +53,9 @@ public class GUI extends JFrame {
         scorePanel.add(playerScoreLabel);
         scorePanel.add(NPCScoreLabel);
 
-        mainPanel.add(BorderLayout.NORTH, buttonPanel);
+        mainPanel.add(BorderLayout.SOUTH, buttonPanel);
         mainPanel.add(BorderLayout.CENTER, userHandPanel);
-        mainPanel.add(BorderLayout.SOUTH, houseHandPanel);
+        mainPanel.add(BorderLayout.NORTH, houseHandPanel);
         mainPanel.add(BorderLayout.WEST, deckPanel);
         mainPanel.add(BorderLayout.EAST, scorePanel);
     }
@@ -78,15 +78,20 @@ public class GUI extends JFrame {
         scorePanel = new JPanel(new GridLayout(2, 1));
         mainPanel = new JPanel(new BorderLayout());
     }
-    public void updateHandImages(List<JLabel> cardImages, JPanel playerPanel) {
-
+    public void updateHandImages(List<JLabel> cardImages) {
         for (JLabel cardImage : cardImages) {
-            playerPanel.add(cardImage);
+            userHandPanel.add(cardImage);
         }
         revalidate();
         repaint();
+    }
 
-
+    public void updateHouseImages(List<JLabel> cardImages) {
+        for (JLabel cardImage : cardImages) {
+            houseHandPanel.add(cardImage);
+        }
+        revalidate();
+        repaint();
     }
 
     public JPanel getUserHandPanel() {

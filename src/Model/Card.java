@@ -24,27 +24,6 @@ public class Card {
         //todo implement method
     }
 
-    public void setSuit(int suit) {
-        if (suit < 0 || suit > 3) {
-            throw new IllegalArgumentException("Måste vara mellan 0 och 3");
-        } else {
-            switch (suit) {
-                case 0 -> this.suit = CardSuits.CLUB;
-                case 1 -> this.suit = CardSuits.DIAMOND;
-                case 2 -> this.suit = CardSuits.HEART;
-                case 3 -> this.suit = CardSuits.SPADE;
-            }
-        }
-    }
-
-    public void setValue(int value) {
-        if (value < 2 || value > 14) {
-            throw new IllegalArgumentException("Måste vara högre än 2 och lägre än 14");
-        } else {
-            this.value = value;
-        }
-
-    }
 
     // endast för debug, remove later:
     public String type(int type) {
