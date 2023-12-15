@@ -12,7 +12,7 @@ public abstract class Player {
         this.currentHand = new ArrayList<>();
     }
 
-    public void discardHand(){
+    public void discardHand() {
         currentHand.clear();
     }
 
@@ -51,8 +51,8 @@ public abstract class Player {
 
     }
 
-        public List<Card> getCurrentHand() {
-            return currentHand;
-        }
+    public List<Card> getCurrentHand() {
+        return currentHand;
     }
+}
 

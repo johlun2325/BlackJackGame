@@ -2,8 +2,7 @@ package Model.CardFactory;
 
 import javax.swing.*;
 
-public interface Card {  //change interface name later
-
+public interface Card {
     String getSuit();
     int getValue();
     void setImage(String path);

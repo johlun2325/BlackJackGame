@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GUI extends JFrame {
-    public JButton newCard;
-    public JButton noMoreCards;
     public JButton newGame;
+    public JButton noMoreCards;
+    public JButton newCard;
     public JButton rules;
     public JButton exit;
 
@@ -29,7 +29,7 @@ public class GUI extends JFrame {
 
     private JDialog dialog;
     private JScrollPane scrollPane;
-    private JTextArea textArea;
+    private JTextArea rulesText;
 
     private JPanel mainPanel;
 
@@ -144,7 +144,6 @@ public class GUI extends JFrame {
         houseHandPanel.removeAll();
     }
 
-
     public void updateHouseHandImages(List<JLabel> cardImages) {
         for (JLabel cardImage : cardImages) {
             houseHandPanel.add(cardImage);
@@ -152,6 +151,7 @@ public class GUI extends JFrame {
         revalidate();
         repaint();
     }
+
 
 
     public void newRoundLayout() {
@@ -165,12 +165,10 @@ public class GUI extends JFrame {
         totalCapital.setText(s + capital);
     }
 
-
     public void setCurrentBet(int bet) {
         String s = "Current Bet: ";
         currentBet.setText(s+bet);
     }
-
 
     public String readRulesFromFile(String filePath) {
         try {
@@ -185,15 +183,15 @@ public class GUI extends JFrame {
     public void showRules() {
         String rulesText = readRulesFromFile("src/rules.txt");
 
-        textArea = new JTextArea(rulesText);
-        textArea.setEditable(false);
-        textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
-        textArea.setCaretPosition(0);
-        textArea.setBackground(lightYellow);
-        textArea.setFont(new Font("Arial", Font.BOLD, 14));
+        this.rulesText = new JTextArea(rulesText);
+        this.rulesText.setEditable(false);
+        this.rulesText.setWrapStyleWord(true);
+        this.rulesText.setLineWrap(true);
+        this.rulesText.setCaretPosition(0);
+        this.rulesText.setBackground(lightYellow);
+        this.rulesText.setFont(new Font("Arial", Font.BOLD, 14));
 
-        scrollPane = new JScrollPane(textArea);
+        scrollPane = new JScrollPane(this.rulesText);
         scrollPane.setPreferredSize(new Dimension(500, 350));
 
         dialog = new JDialog();
