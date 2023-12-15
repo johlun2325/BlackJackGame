@@ -31,5 +31,5 @@ Utvärdering av händerna
 
 Om spelarens hand är närmare 21 än dealerens hand utan att överstiga 21, vinner spelaren.
 Om dealern hamnar över 21 och men inte spelaren, vinner spelaren.
-Om både spelaren och dealern har samma handvärde, blir det oavgjort (push/draw), och spelaren får tillbaka sin insats.
+Om både spelarens och dealerns hand har samma värde, blir det oavgjort (push/draw), och spelaren får tillbaka sin insats.
 Om spelarens hand överstiger 21 förlorar denne.
