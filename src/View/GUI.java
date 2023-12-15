@@ -8,9 +8,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GUI extends JFrame {
-    public JButton newCard;
-    public JButton noMoreCards;
     public JButton newGame;
+    public JButton noMoreCards;
+    public JButton newCard;
     public JButton rules;
 
     private ImageIcon cardBack;
@@ -28,7 +28,7 @@ public class GUI extends JFrame {
 
     private JDialog dialog;
     private JScrollPane scrollPane;
-    private JTextArea textArea;
+    private JTextArea rulesText;
 
     private JPanel mainPanel;
 
@@ -183,15 +183,15 @@ public class GUI extends JFrame {
     public void showRules() {
         String rulesText = readRulesFromFile("src/rules.txt");
 
-        textArea = new JTextArea(rulesText);
-        textArea.setEditable(false);
-        textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
-        textArea.setCaretPosition(0);
-        textArea.setBackground(new Color(255, 235, 150));
-        textArea.setFont(new Font("Arial", Font.BOLD, 14));
+        this.rulesText = new JTextArea(rulesText);
+        this.rulesText.setEditable(false);
+        this.rulesText.setWrapStyleWord(true);
+        this.rulesText.setLineWrap(true);
+        this.rulesText.setCaretPosition(0);
+        this.rulesText.setBackground(new Color(255, 235, 150));
+        this.rulesText.setFont(new Font("Arial", Font.BOLD, 14));
 
-        scrollPane = new JScrollPane(textArea);
+        scrollPane = new JScrollPane(this.rulesText);
         scrollPane.setPreferredSize(new Dimension(500, 350));
 
         dialog = new JDialog();

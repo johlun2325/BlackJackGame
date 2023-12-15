@@ -13,13 +13,13 @@ import java.util.List;
 public class BlackJackLogic implements ActionListener {
 
     private DeckOfCards deckOfCards;
+    private GUI gui;
     private final User user;
     private final House house;
-    private int currentBet;
-
     private String userName;
+    private int currentBet;
     private int currentCapital;
-    private GUI gui;
+
 
     public BlackJackLogic() {
         setUserValues();
@@ -47,10 +47,6 @@ public class BlackJackLogic implements ActionListener {
         gui.updateUserHandImages(getCardImages(getUser()));
         gui.updateHouseHandImages(getCardImages(getHouse()));
     }
-
-
-
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -170,7 +166,6 @@ public class BlackJackLogic implements ActionListener {
         user.addToTotalCapital(winnings);
         return winnings;
     }
-
     public List<Card> getUserCards() {
         return user.getCurrentHand();
     }
