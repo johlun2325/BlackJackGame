@@ -12,6 +12,7 @@ public class GUI extends JFrame {
     public JButton noMoreCards;
     public JButton newGame;
     public JButton rules;
+    public JButton exit;
 
     private ImageIcon cardBack;
 
@@ -57,6 +58,7 @@ public class GUI extends JFrame {
         buttonPanel.add(noMoreCards);
         buttonPanel.add(newGame);
         buttonPanel.add(rules);
+        buttonPanel.add(exit);
         buttonPanel.setOpaque(false);
         centerPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -100,6 +102,7 @@ public class GUI extends JFrame {
         noMoreCards = new JButton("Stop!");
         newGame = new JButton("New game");
         rules = new JButton("Rules");
+        exit = new JButton("Exit");
 
         instructions = new JLabel(" ");
         instructions.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
