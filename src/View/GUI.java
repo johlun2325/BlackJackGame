@@ -33,7 +33,6 @@ public class GUI extends JFrame {
         this.setTitle("Black Jack");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.pack();
         this.setResizable(false);
         this.setVisible(true);
     }
