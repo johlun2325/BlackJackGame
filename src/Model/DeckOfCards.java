@@ -17,20 +17,6 @@ public class DeckOfCards {
         createCardsFromFactory();
     }
 
-//    public void createNewDeck() {
-//        deckOfCards.clear();
-//        for (int i = 0; i < 4; i++) {
-//            for (int j = 2; j < 15; j++) {
-//                Card card = new Card(i,j);
-//                deckOfCards.add(card);
-//            }
-//        }
-//        ImagePaths imagePaths = new ImagePaths();
-//        for (int i = 0; i < 52; i++) {
-//            deckOfCards.get(i).setImage(imagePaths.getImagePath(i));
-//}
-//        Collections.shuffle(deckOfCards);
-//}
 
     public void createCardsFromFactory() {
         CardFactory factory = new CardFactory();
@@ -65,9 +51,6 @@ public class DeckOfCards {
         System.out.println(deckOfCards.get(0).toString());
         deckOfCards.remove(0);
         return tempCard;
-    }
-
-    public void shuffle() {
     }
 
     public List<Card> getDeckOfCards(){

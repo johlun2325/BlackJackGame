@@ -78,9 +78,9 @@ public class BlackJackLogic implements ActionListener {
             }
 
             switch (calculateWinner()) {
-                case WIN -> JOptionPane.showMessageDialog(null, "You win: " + payOutWinnings() + "€");
-                case LOSE -> JOptionPane.showMessageDialog(null, "You lose ");
-                case DRAW -> JOptionPane.showMessageDialog(null, "It's a draw!");
+                case WIN -> JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
+                case LOSE -> JOptionPane.showMessageDialog(null, EndOfRound.LOSE.getEndOfRound());
+                case DRAW -> JOptionPane.showMessageDialog(null, EndOfRound.DRAW.getEndOfRound());
             }
             nextRound();
         } else if (e.getSource() == gui.newGame) {
@@ -181,5 +181,9 @@ public class BlackJackLogic implements ActionListener {
 
     public House getHouse() {
         return house;
+    }
+
+    public static void main(String[] args) {
+        new BlackJackLogic();
     }
 }

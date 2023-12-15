@@ -181,7 +181,7 @@ public class GUI extends JFrame {
 
 
     public void showRules() {
-        String rulesText = readRulesFromFile("rules.txt");
+        String rulesText = readRulesFromFile("src/rules.txt");
 
         textArea = new JTextArea(rulesText);
         textArea.setEditable(false);
