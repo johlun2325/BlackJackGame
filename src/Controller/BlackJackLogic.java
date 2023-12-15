@@ -3,6 +3,7 @@ package Controller;
 import Model.*;
 import Model.CardFactory.Card;
 import View.GUI;
+import View.Instructions;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -49,9 +50,6 @@ public class BlackJackLogic implements ActionListener {
     }
 
 
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         //alla händelser från gui med implementerad logik
@@ -62,6 +60,7 @@ public class BlackJackLogic implements ActionListener {
             userDrawCard();
             gui.updateUserHandImages(getCardImages(getUser()));
             if (user.getHandValue()== -1) {
+                gui.updateInstructions(Instructions.BUSTED.getInstruction());
                 JOptionPane.showMessageDialog(null, "You're bust!");
                 nextRound();
 
@@ -97,6 +96,7 @@ public class BlackJackLogic implements ActionListener {
         if (deckOfCards.getDeckOfCards().size() > 15) {
             deckOfCards.createCardsFromFactory();
         }
+        gui.updateInstructions(Instructions.PLACE_BET.getInstruction());
         gui.newRoundLayout();
         discardAllHands();
         dealCardsAtStartOfRound();
@@ -116,6 +116,7 @@ public class BlackJackLogic implements ActionListener {
             gui.setTotalCapital(user.getCurrentCapital());
         }
         gui.setCurrentBet(currentBet);
+        gui.updateInstructions(Instructions.DECIDE_NEXT_MOVE.getInstruction());
     }
 
     public List<JLabel> getCardImages(Player player) {
@@ -142,10 +143,15 @@ public class BlackJackLogic implements ActionListener {
     public EndOfRound calculateWinner() {
 
         if (user.getHandValue() > house.getHandValue()) {
+            gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
             return EndOfRound.WIN;
+
         } else if (user.getHandValue() < house.getHandValue()) {
+            gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
             return EndOfRound.LOSE;
+
         } else {
+            gui.updateInstructions(Instructions.DRAW_ROUND.getInstruction());
             return EndOfRound.DRAW;
         }
     }

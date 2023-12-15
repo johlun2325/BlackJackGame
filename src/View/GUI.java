@@ -98,7 +98,7 @@ public class GUI extends JFrame {
         newGame = new JButton("New game");
         rules = new JButton("Rules");
 
-        instructions = new JLabel("Här kommer instruktioner");
+        instructions = new JLabel(" "); // HÄR LIGGER INSTRUKTIONERNA
         instructions.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
         instructions.setForeground(new Color(255, 200, 0));
         instructions.setHorizontalAlignment(JLabel.CENTER);
@@ -193,6 +193,11 @@ public class GUI extends JFrame {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+    }
+
+
+    public void updateInstructions(String instruction){
+       instructions.setText(instruction);
     }
 }
 
