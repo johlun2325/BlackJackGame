@@ -12,6 +12,7 @@ public class GUI extends JFrame {
     public JButton noMoreCards;
     public JButton newCard;
     public JButton rules;
+    public JButton exit;
 
     private ImageIcon cardBack;
 
@@ -32,6 +33,9 @@ public class GUI extends JFrame {
 
     private JPanel mainPanel;
 
+    private Color brightYellow = new Color(255, 200, 0);
+    private Color lightYellow = new Color(255, 235, 150);
+
 
     public GUI() {
         initiateComponents(); // initierar alla komponenter
@@ -46,6 +50,7 @@ public class GUI extends JFrame {
         this.setVisible(true);
     }
 
+
     private void addComponents() {
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
@@ -53,6 +58,7 @@ public class GUI extends JFrame {
         buttonPanel.add(noMoreCards);
         buttonPanel.add(newGame);
         buttonPanel.add(rules);
+        buttonPanel.add(exit);
         buttonPanel.setOpaque(false);
         centerPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -61,9 +67,6 @@ public class GUI extends JFrame {
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
 
-
-
-
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
 
@@ -71,21 +74,14 @@ public class GUI extends JFrame {
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
 
-
         userHandPanel.setOpaque(false);
 
-
-//        mainPanel.add(BorderLayout.WEST, deckPanel);
         mainPanel.add(centerPanel,BorderLayout.CENTER);
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
         mainPanel.add(houseHandPanel,BorderLayout.NORTH);
         mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
-
-
-
-
-
     }
+
 
     private void createMainPanel() {
         ImageIcon backgroundImage = new ImageIcon("src/Background/background.jpg");
@@ -98,26 +94,30 @@ public class GUI extends JFrame {
             }
         };
         mainPanel.setOpaque(false);
-
-
     }
+
 
     private void initiateComponents() {
         newCard = new JButton("Hit me!");
         noMoreCards = new JButton("Stop!");
         newGame = new JButton("New game");
         rules = new JButton("Rules");
+        exit = new JButton("Exit");
 
-        instructions = new JLabel("Här kommer instruktioner");
+        instructions = new JLabel(" ");
         instructions.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
-        instructions.setForeground(new Color(255, 200, 0));
+        instructions.setForeground(brightYellow);
         instructions.setHorizontalAlignment(JLabel.CENTER);
 
         cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
         cardBackLabel = new JLabel(cardBack);
 
         totalCapital = new JLabel("Total Capital: ");
+        totalCapital.setForeground(brightYellow);
+        totalCapital.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
         currentBet = new JLabel("Current Bet: ");
+        currentBet.setForeground(brightYellow);
+        currentBet.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
 
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
@@ -126,10 +126,9 @@ public class GUI extends JFrame {
         centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-
         createMainPanel();
-
     }
+
 
     public void updateUserHandImages(List<JLabel> cardImages) {
         userHandPanel.removeAll();
@@ -139,6 +138,7 @@ public class GUI extends JFrame {
         revalidate();
         repaint();
     }
+
 
     public void removeUpsideDownCard() {
         houseHandPanel.removeAll();
@@ -183,13 +183,13 @@ public class GUI extends JFrame {
     public void showRules() {
         String rulesText = readRulesFromFile("src/rules.txt");
 
-        this.rulesText = new JTextArea(rulesText);
-        this.rulesText.setEditable(false);
-        this.rulesText.setWrapStyleWord(true);
-        this.rulesText.setLineWrap(true);
-        this.rulesText.setCaretPosition(0);
-        this.rulesText.setBackground(new Color(255, 235, 150));
-        this.rulesText.setFont(new Font("Arial", Font.BOLD, 14));
+        textArea = new JTextArea(rulesText);
+        textArea.setEditable(false);
+        textArea.setWrapStyleWord(true);
+        textArea.setLineWrap(true);
+        textArea.setCaretPosition(0);
+        textArea.setBackground(lightYellow);
+        textArea.setFont(new Font("Arial", Font.BOLD, 14));
 
         scrollPane = new JScrollPane(this.rulesText);
         scrollPane.setPreferredSize(new Dimension(500, 350));
@@ -203,6 +203,10 @@ public class GUI extends JFrame {
         dialog.setVisible(true);
     }
 
+
+    public void updateInstructions(String instruction){
+       instructions.setText(instruction);
+    }
 }
 
 
