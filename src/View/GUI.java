@@ -32,6 +32,9 @@ public class GUI extends JFrame {
 
     private JPanel mainPanel;
 
+    private Color brightYellow = new Color(255, 200, 0);
+    private Color lightYellow = new Color(255, 235, 150);
+
 
     public GUI() {
         initiateComponents(); // initierar alla komponenter
@@ -98,16 +101,20 @@ public class GUI extends JFrame {
         newGame = new JButton("New game");
         rules = new JButton("Rules");
 
-        instructions = new JLabel(" "); // HÄR LIGGER INSTRUKTIONERNA
+        instructions = new JLabel(" ");
         instructions.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
-        instructions.setForeground(new Color(255, 200, 0));
+        instructions.setForeground(brightYellow);
         instructions.setHorizontalAlignment(JLabel.CENTER);
 
         cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
         cardBackLabel = new JLabel(cardBack);
 
         totalCapital = new JLabel("Total Capital: ");
+        totalCapital.setForeground(brightYellow);
+        totalCapital.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
         currentBet = new JLabel("Current Bet: ");
+        currentBet.setForeground(brightYellow);
+        currentBet.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
 
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
@@ -180,7 +187,7 @@ public class GUI extends JFrame {
         textArea.setWrapStyleWord(true);
         textArea.setLineWrap(true);
         textArea.setCaretPosition(0);
-        textArea.setBackground(new Color(255, 235, 150));
+        textArea.setBackground(lightYellow);
         textArea.setFont(new Font("Arial", Font.BOLD, 14));
 
         scrollPane = new JScrollPane(textArea);
