@@ -36,16 +36,16 @@ public class DeckOfCards {
         CardFactory factory = new CardFactory();
         List<Integer> listOfValues = Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
         List<CardSuits> listOfSuits = Arrays.asList(
-                CardSuits.SPADE,
                 CardSuits.CLUB,
+                CardSuits.DIAMOND,
                 CardSuits.HEART,
-                CardSuits.DIAMOND);
+                CardSuits.SPADE);
 
         deckOfCards.clear();
 
         for (int i = 0; i < listOfSuits.size(); i++) {
             for (int j = 0; j < listOfValues.size(); j++) {
-                Card card = factory.createCard(listOfSuits.get(i), j);
+                Card card = factory.createCard(listOfSuits.get(i), listOfValues.get(j));
                 deckOfCards.add(card);
             }
         }
@@ -61,6 +61,8 @@ public class DeckOfCards {
 
     public Card dealCard() {
         Card tempCard = deckOfCards.get(0);
+        System.out.println(deckOfCards.get(0).getValue());
+        System.out.println(deckOfCards.get(0).toString());
         deckOfCards.remove(0);
         return tempCard;
     }

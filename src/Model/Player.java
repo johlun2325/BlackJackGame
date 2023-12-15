@@ -22,6 +22,7 @@ public abstract class Player {
 
     public int getHandValue() {
         int totalHandValue = 0;
+        int alternativeValue = 0;
 
         for (Card card : currentHand) {
             switch (card.getValue()) {
@@ -34,10 +35,14 @@ public abstract class Player {
         if (totalHandValue > 21) {
             for (Card card : currentHand) {
                 switch (card.getValue()) {
-                    case 11, 12, 13 -> totalHandValue += 10;
-                    case 14 -> totalHandValue += 1;
-                    default -> totalHandValue += card.getValue();
+                    case 11, 12, 13 -> alternativeValue += 10;
+                    case 14 -> alternativeValue += 1;
+                    default -> alternativeValue += card.getValue();
                 }
+            }
+
+            if (alternativeValue < 21) {
+                totalHandValue = alternativeValue;
             }
         }
         if (totalHandValue <= 21) {
