@@ -32,6 +32,7 @@ public class BlackJackLogic implements ActionListener {
         gui.newGame.addActionListener(this);
         gui.noMoreCards.addActionListener(this);
         gui.newCard.addActionListener(this);
+        gui.rules.addActionListener(this);
         gui.setTotalCapital(currentCapital);
         nextRound();
 
@@ -84,6 +85,10 @@ public class BlackJackLogic implements ActionListener {
             nextRound();
         } else if (e.getSource() == gui.newGame) {
             nextRound();
+
+        } else if (e.getSource() == gui.rules) {
+            gui.showRules();
+
         }
 
     }
