@@ -42,10 +42,10 @@ public class GUI extends JFrame {
         this.setTitle("Black Jack");
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //this.pack();
         this.setResizable(false);
         this.setVisible(true);
     }
+
 
     private void addComponents() {
         centerPanel.add(buttonPanel);
@@ -62,9 +62,6 @@ public class GUI extends JFrame {
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
 
-
-
-
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
 
@@ -72,21 +69,14 @@ public class GUI extends JFrame {
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
 
-
         userHandPanel.setOpaque(false);
 
-
-//        mainPanel.add(BorderLayout.WEST, deckPanel);
         mainPanel.add(centerPanel,BorderLayout.CENTER);
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
         mainPanel.add(houseHandPanel,BorderLayout.NORTH);
         mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
-
-
-
-
-
     }
+
 
     private void createMainPanel() {
         ImageIcon backgroundImage = new ImageIcon("src/Background/background.jpg");
@@ -99,9 +89,8 @@ public class GUI extends JFrame {
             }
         };
         mainPanel.setOpaque(false);
-
-
     }
+
 
     private void initiateComponents() {
         newCard = new JButton("Hit me!");
@@ -127,10 +116,9 @@ public class GUI extends JFrame {
         centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-
         createMainPanel();
-
     }
+
 
     public void updateUserHandImages(List<JLabel> cardImages) {
         userHandPanel.removeAll();
@@ -141,9 +129,11 @@ public class GUI extends JFrame {
         repaint();
     }
 
+
     public void removeUpsideDownCard() {
         houseHandPanel.removeAll();
     }
+
 
     public void updateHouseHandImages(List<JLabel> cardImages) {
         for (JLabel cardImage : cardImages) {
@@ -152,7 +142,6 @@ public class GUI extends JFrame {
         revalidate();
         repaint();
     }
-
 
 
     public void newRoundLayout() {
@@ -166,10 +155,12 @@ public class GUI extends JFrame {
         totalCapital.setText(s + capital);
     }
 
+
     public void setCurrentBet(int bet) {
         String s = "Current Bet: ";
         currentBet.setText(s+bet);
     }
+
 
     public String readRulesFromFile(String filePath) {
         try {
@@ -203,7 +194,6 @@ public class GUI extends JFrame {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
-
 }
 
 
