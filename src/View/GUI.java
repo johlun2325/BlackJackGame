@@ -19,6 +19,7 @@ public class GUI extends JFrame {
     private JLabel cardBackLabel;
     private JLabel totalCapital;
     private JLabel currentBet;
+    private JLabel name;
     private JLabel instructions;
 
     private JPanel buttonPanel;
@@ -70,6 +71,7 @@ public class GUI extends JFrame {
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
 
+        betAndCapitalPanel.add(name);
         betAndCapitalPanel.add(totalCapital);
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
@@ -112,9 +114,14 @@ public class GUI extends JFrame {
         cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
         cardBackLabel = new JLabel(cardBack);
 
+        name = new JLabel("Player name: ");
+        name.setForeground(brightYellow);
+        name.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
+
         totalCapital = new JLabel("Total Capital: ");
         totalCapital.setForeground(brightYellow);
         totalCapital.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
+
         currentBet = new JLabel("Current Bet: ");
         currentBet.setForeground(brightYellow);
         currentBet.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
@@ -122,7 +129,7 @@ public class GUI extends JFrame {
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
-        betAndCapitalPanel = new JPanel(new GridLayout(2, 1));
+        betAndCapitalPanel = new JPanel(new GridLayout(3, 1));
         centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
@@ -168,6 +175,10 @@ public class GUI extends JFrame {
     public void setCurrentBet(int bet) {
         String s = "Current Bet: ";
         currentBet.setText(s+bet);
+    }
+
+    public void setPlayerName(String playerName) {
+        name.setText("Player: " + playerName);
     }
 
     public String readRulesFromFile(String filePath) {

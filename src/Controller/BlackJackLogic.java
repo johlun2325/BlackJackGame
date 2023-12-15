@@ -36,6 +36,7 @@ public class BlackJackLogic implements ActionListener {
         gui.rules.addActionListener(this);
         gui.exit.addActionListener(this);
         gui.setTotalCapital(currentCapital);
+        gui.setPlayerName(userName);
         nextRound();
 
     }
