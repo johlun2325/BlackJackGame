@@ -63,18 +63,22 @@ public class BlackJackLogic implements ActionListener {
             if (user.getHandValue()== -1) {
                 gui.updateInstructions(Instructions.BUSTED.getInstruction());
                 JOptionPane.showMessageDialog(null, "You're bust!");
+                gui.newCard.setEnabled(false);
+                gui.noMoreCards.setEnabled(false);
                 //nextRound();
-
+                
             }
 
         } else if (e.getSource() == gui.noMoreCards) {
             gui.removeUpsideDownCard();
+            gui.newCard.setEnabled(false);
+            gui.noMoreCards.setEnabled(false);
             while (getHouse().getHandValue() < 17 && getHouse().getHandValue() > 0) {
                 System.out.println(getHouse().getHandValue());
                 System.out.println(getHouse().getCurrentHand());
                 houseDrawCard();
                 gui.updateHouseHandImages(getCardImages(getHouse()));
-
+                
             }
 
             switch (calculateWinner()) {
@@ -102,6 +106,8 @@ public class BlackJackLogic implements ActionListener {
         }
         gui.updateInstructions(Instructions.PLACE_BET.getInstruction());
         gui.newRoundLayout();
+        gui.newCard.setEnabled(true);
+        gui.noMoreCards.setEnabled(true);
         discardAllHands();
         dealCardsAtStartOfRound();
         updateAllHandImages();
