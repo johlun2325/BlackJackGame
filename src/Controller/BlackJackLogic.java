@@ -63,7 +63,7 @@ public class BlackJackLogic implements ActionListener {
             if (user.getHandValue()== -1) {
                 gui.updateInstructions(Instructions.BUSTED.getInstruction());
                 JOptionPane.showMessageDialog(null, "You're bust!");
-                nextRound();
+                //nextRound();
 
             }
 
@@ -82,7 +82,7 @@ public class BlackJackLogic implements ActionListener {
                 case LOSE -> JOptionPane.showMessageDialog(null, "You lose ");
                 case DRAW -> JOptionPane.showMessageDialog(null, "It's a draw!");
             }
-            nextRound();
+            //nextRound();
         } else if (e.getSource() == gui.newGame) {
             nextRound();
 
