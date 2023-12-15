@@ -20,11 +20,11 @@ Spelupplägg
 3.Spelarens tur: Spelaren har nu några val:
     - Hit (ta ett kort): Spelaren begär ett ytterligare kort för att öka handens totala värde.
     - Stop (stanna): Spelaren är nöjd med handens nuvarande värde och vill inte ha fler kort.
-    - Double Down: Spelaren dubblar sin ursprungliga insats och får endast ett extra kort (dock ej i denna förenklade version av spelet)
+    - Double down: Spelaren dubblar sin ursprungliga insats och får endast ett extra kort (dock ej i denna förenklade version av spelet)
     - Split: Om spelaren har två kort med samma värde, kan dessa delas upp i två separata händer, med en separat insats för varje hand (dock ej i denna förenklade version av spelet)
-    - Surrender (Ge upp): I vissa varianter av spelet kan spelaren välja att ge upp halva sin insats och sluta spela rundan (dock ej i denna förenklade version av spelet)
+    - Surrender (ge upp): I vissa varianter av spelet kan spelaren välja att ge upp halva sin insats och sluta spela rundan (dock ej i denna förenklade version av spelet)
 
-4.Dealerens Tur: När alla spelare har avslutat sina turer, avslöjar dealern sitt dolda kort och spelar enligt fastställda regler (oftast tar dealern kort tills handens totala värde är 17 eller högre).
+4.Dealerens tur: När alla spelare har avslutat sina turer, avslöjar dealern sitt dolda kort och spelar enligt fastställda regler (oftast tar dealern kort tills handens totala värde är 17 eller högre).
 
 
 Utvärdering av händerna
