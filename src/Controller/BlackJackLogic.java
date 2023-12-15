@@ -70,7 +70,7 @@ public class BlackJackLogic implements ActionListener {
             }
 
         } else if (e.getSource() == gui.noMoreCards) {
-            gui.removeUpsideDownCard();
+            gui.removeHouseCards();
             gui.newCard.setEnabled(false);
             gui.noMoreCards.setEnabled(false);
             while (getHouse().getHandValue() < 17 && getHouse().getHandValue() > 0) {
