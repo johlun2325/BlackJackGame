@@ -183,13 +183,13 @@ public class GUI extends JFrame {
     public void showRules() {
         String rulesText = readRulesFromFile("src/rules.txt");
 
-        textArea = new JTextArea(rulesText);
-        textArea.setEditable(false);
-        textArea.setWrapStyleWord(true);
-        textArea.setLineWrap(true);
-        textArea.setCaretPosition(0);
-        textArea.setBackground(lightYellow);
-        textArea.setFont(new Font("Arial", Font.BOLD, 14));
+        this.rulesText = new JTextArea(rulesText);
+        this.rulesText.setEditable(false);
+        this.rulesText.setWrapStyleWord(true);
+        this.rulesText.setLineWrap(true);
+        this.rulesText.setCaretPosition(0);
+        this.rulesText.setBackground(lightYellow);
+        this.rulesText.setFont(new Font("Arial", Font.BOLD, 14));
 
         scrollPane = new JScrollPane(this.rulesText);
         scrollPane.setPreferredSize(new Dimension(500, 350));

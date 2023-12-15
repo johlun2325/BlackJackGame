@@ -112,7 +112,7 @@ public class BlackJackLogic implements ActionListener {
         currentBet = 0;
         String answer = JOptionPane.showInputDialog(null, "Place your bet");
 
-        int bet = Integer.parseInt(answer);
+        int bet = Integer.parseInt(answer); // exception vid "avbryt" option
 
         if (bet < currentCapital) {
             currentBet = bet;
