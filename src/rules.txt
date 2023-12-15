@@ -6,7 +6,7 @@ Målet med Black Jack är att slå dealern (ibland kallad "huset") genom att ha 
 
 Kortens värde
 
-Numrerade kort (2 till 10) är värda sitt lika mycket det värde de visar (t.ex. en 7:a är värd 7 poäng).
+Numrerade kort (2 till 10) är värda lika mycket som det värde de visar (t.ex. en 7:a är värd 7 poäng).
 Knekt, Dam, Kung (klädda kort) är värda 10 poäng.
 Ess kan vara värt antingen 1 eller 11 poäng, beroende på vad som är mest fördelaktigt för spelarens hand.
 
