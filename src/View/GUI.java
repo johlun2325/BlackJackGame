@@ -36,7 +36,9 @@ public class GUI extends JFrame {
 
     private Color brightYellow = new Color(255, 200, 0);
     private Color lightYellow = new Color(255, 235, 150);
+    Font instructionsFont = new Font("Rockwell Condensed", Font.BOLD, 18);
     Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
+    Font rulesFont = new Font("Arial", Font.BOLD, 14);
 
 
     public GUI() {
@@ -108,7 +110,7 @@ public class GUI extends JFrame {
         exit = new JButton("Exit");
 
         instructions = new JLabel(" ");
-        instructions.setFont(labelFont);
+        instructions.setFont(instructionsFont);
         instructions.setForeground(brightYellow);
         instructions.setHorizontalAlignment(JLabel.CENTER);
 
@@ -125,7 +127,7 @@ public class GUI extends JFrame {
 
         currentBet = new JLabel("Current Bet: ");
         currentBet.setForeground(brightYellow);
-        currentBet.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
+        currentBet.setFont(labelFont);
 
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
@@ -161,7 +163,6 @@ public class GUI extends JFrame {
     }
 
 
-
     public void newRoundLayout() {
         houseHandPanel.removeAll();
         houseHandPanel.add(cardBackLabel);
@@ -178,9 +179,11 @@ public class GUI extends JFrame {
         currentBet.setText(s+bet);
     }
 
+
     public void setPlayerName(String playerName) {
         name.setText("Player: " + playerName);
     }
+
 
     public String readRulesFromFile(String filePath) {
         try {
@@ -201,7 +204,7 @@ public class GUI extends JFrame {
         this.rulesText.setLineWrap(true);
         this.rulesText.setCaretPosition(0);
         this.rulesText.setBackground(lightYellow);
-        this.rulesText.setFont(new Font("Arial", Font.BOLD, 14));
+        this.rulesText.setFont(rulesFont);
 
         scrollPane = new JScrollPane(this.rulesText);
         scrollPane.setPreferredSize(new Dimension(500, 350));
@@ -219,6 +222,7 @@ public class GUI extends JFrame {
     public void updateInstructions(String instruction){
        instructions.setText(instruction);
     }
+
 }
 
 
