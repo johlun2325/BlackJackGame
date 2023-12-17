@@ -36,6 +36,7 @@ public class GUI extends JFrame {
 
     private Color brightYellow = new Color(255, 200, 0);
     private Color lightYellow = new Color(255, 235, 150);
+    Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
 
 
     public GUI() {
@@ -107,7 +108,7 @@ public class GUI extends JFrame {
         exit = new JButton("Exit");
 
         instructions = new JLabel(" ");
-        instructions.setFont(new Font("Rockwell Condensed", Font.BOLD, 18));
+        instructions.setFont(labelFont);
         instructions.setForeground(brightYellow);
         instructions.setHorizontalAlignment(JLabel.CENTER);
 
@@ -116,11 +117,11 @@ public class GUI extends JFrame {
 
         name = new JLabel("Player name: ");
         name.setForeground(brightYellow);
-        name.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
+        name.setFont(labelFont);
 
         totalCapital = new JLabel("Total Capital: ");
         totalCapital.setForeground(brightYellow);
-        totalCapital.setFont(new Font("Rockwell Condensed", Font.BOLD, 14));
+        totalCapital.setFont(labelFont);
 
         currentBet = new JLabel("Current Bet: ");
         currentBet.setForeground(brightYellow);
