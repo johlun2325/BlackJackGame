@@ -17,7 +17,7 @@ public class User extends Player{
         return currentCapital;
     }
 
-    public void subractBetFromCapital(int bet) {
+    public void subtractBetFromCapital(int bet) {
         this.currentCapital -= bet;
     }
 }

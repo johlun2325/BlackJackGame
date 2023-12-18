@@ -50,7 +50,6 @@ public class BlackJackLogic implements ActionListener {
         gui.updateHouseHandImages(getCardImages(getHouse()));
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         //alla händelser från gui med implementerad logik
@@ -122,7 +121,7 @@ public class BlackJackLogic implements ActionListener {
 
         if (bet < currentCapital) {
             currentBet = bet;
-            user.subractBetFromCapital(bet);
+            user.subtractBetFromCapital(bet);
             gui.setTotalCapital(user.getCurrentCapital());
         }
         gui.setCurrentBet(currentBet);
@@ -137,7 +136,6 @@ public class BlackJackLogic implements ActionListener {
 
         return cardImages;
     }
-
 
     public void setUserValues() {
         userName = JOptionPane.showInputDialog("Enter player name: ");
