@@ -36,6 +36,7 @@ public class BlackJackLogic implements ActionListener {
         gui.rules.addActionListener(this);
         gui.exit.addActionListener(this);
         gui.setTotalCapital(currentCapital);
+        gui.setPlayerName(userName);
         nextRound();
 
     }
@@ -108,9 +109,10 @@ public class BlackJackLogic implements ActionListener {
         gui.newCard.setEnabled(true);
         gui.noMoreCards.setEnabled(true);
         discardAllHands();
-        dealCardsAtStartOfRound();
         updateAllHandImages();
         placeBet();
+        dealCardsAtStartOfRound();
+        updateAllHandImages();
     }
 
     private void placeBet() {

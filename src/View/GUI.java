@@ -17,6 +17,7 @@ public class GUI extends JFrame {
     private JLabel cardBackLabel;
     private JLabel totalCapital;
     private JLabel currentBet;
+    private JLabel name;
     private JLabel instructions;
 
     private JPanel buttonPanel;
@@ -78,6 +79,7 @@ public class GUI extends JFrame {
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
 
+        betAndCapitalPanel.add(name);
         betAndCapitalPanel.add(totalCapital);
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
@@ -90,6 +92,7 @@ public class GUI extends JFrame {
         mainPanel.add(betAndCapitalPanel, BorderLayout.WEST);
     }
     private void initiateComponents() {
+        name = new JLabel();
         initiateInstructionComponents();
         initiatePanels();
         initiateButtonComponents();
@@ -110,6 +113,7 @@ public class GUI extends JFrame {
         mainPanel.setOpaque(false);
     }
     private void initiateButtonComponents() {
+
         newCard = new JButton("Hit me!");
         noMoreCards = new JButton("Stop!");
         newGame = new JButton("New game");
@@ -126,7 +130,7 @@ public class GUI extends JFrame {
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
-        betAndCapitalPanel = new JPanel(new GridLayout(2, 1));
+        betAndCapitalPanel = new JPanel(new GridLayout(3, 1));
         centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
     }
@@ -172,6 +176,13 @@ public class GUI extends JFrame {
         String s = "Current Bet: ";
         currentBet.setText(s + bet);
     }
+
+
+    public void setPlayerName(String playerName) {
+        name.setText("Player: " + playerName);
+    }
+
+
     public String readRulesFromFile(String filePath) {
         try {
             return new String(Files.readAllBytes(Paths.get(filePath)));
