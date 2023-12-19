@@ -41,6 +41,10 @@ public class BlackJackLogic implements ActionListener {
 
     }
 
+    public void showUserHandValue(){
+        int sum = user.getHandValue();
+        gui.setCurrentHandValue(String.valueOf(sum));
+    }
     public void discardAllHands() {
         user.discardHand();
         house.discardHand();
@@ -57,13 +61,13 @@ public class BlackJackLogic implements ActionListener {
         if (e.getSource() == gui.newCard) {
             userDrawCard();
             gui.updateUserHandImages(getCardImages(getUser()));
-            if (user.getHandValue()== -1) {
+            if (user.getHandValue() == -1) {
                 gui.updateInstructions(Instructions.BUSTED.getInstructionSV());
                 JOptionPane.showMessageDialog(null, "You're bust!");
                 gui.newCard.setEnabled(false);
                 gui.noMoreCards.setEnabled(false);
                 //nextRound();
-                
+
             }
 
         } else if (e.getSource() == gui.noMoreCards) {
@@ -75,11 +79,12 @@ public class BlackJackLogic implements ActionListener {
                 System.out.println(getHouse().getCurrentHand());
                 houseDrawCard();
                 gui.updateHouseHandImages(getCardImages(getHouse()));
-                
+
             }
 
             switch (calculateWinner()) {
-                case WIN -> JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
+                case WIN ->
+                        JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
                 case LOSE -> JOptionPane.showMessageDialog(null, EndOfRound.LOSE.getEndOfRound());
                 case DRAW -> JOptionPane.showMessageDialog(null, EndOfRound.DRAW.getEndOfRound());
             }
@@ -97,7 +102,7 @@ public class BlackJackLogic implements ActionListener {
 
     }
 
-    private void nextRound(){
+    private void nextRound() {
         if (deckOfCards.getDeckOfCards().size() > 15) {
             deckOfCards.createCardsFromFactory();
         }
@@ -110,6 +115,7 @@ public class BlackJackLogic implements ActionListener {
         placeBet();
         dealCardsAtStartOfRound();
         updateAllHandImages();
+        showUserHandValue();
     }
 
     private void placeBet() {
@@ -183,9 +189,7 @@ public class BlackJackLogic implements ActionListener {
         user.addToTotalCapital(winnings);
         return winnings;
     }
-    public List<Card> getUserCards() {
-        return user.getCurrentHand();
-    }
+
 
     public User getUser() {
         return user;

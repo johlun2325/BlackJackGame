@@ -1,5 +1,7 @@
 package View;
 
+import Controller.LanguageManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -22,6 +24,7 @@ public class GUI extends JFrame {
     private JLabel currentBet;
     private JLabel name;
     private JLabel instructions;
+    private JLabel userHandValue; ///
 
     private JPanel buttonPanel;
     protected JPanel userHandPanel;
@@ -56,13 +59,16 @@ public class GUI extends JFrame {
     private String drawCardText =  "Hit me!";
     private String newGameText = "New Game";
     private String stopText = "Stop";
-    private String exitText =  "Exit";
+    private String exitText =  "";
     private String instructionsText = "";
     private String langugeButtonText = "Svenska";
-
+    private String handValue = "Hand value";
 
 
     public GUI() {
+//        LanguageManager.setLanguage("en"); // setting initial language
+//        exitText = LanguageManager.getMessage(exitText);
+
         initiateComponents();
         addComponents();
         this.setLayout(new BorderLayout());
@@ -74,7 +80,10 @@ public class GUI extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
     }
+    public void setCurrentHandValue(String value){
 
+        userHandValue.setText(handValue + value);
+    }
 
     private void addComponents() {
         centerPanel.add(buttonPanel);
@@ -102,8 +111,9 @@ public class GUI extends JFrame {
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
 
-        userHandPanel.setOpaque(false);
+        betAndCapitalPanel.add(userHandValue);
 
+        userHandPanel.setOpaque(false);
         mainPanel.add(centerPanel,BorderLayout.CENTER);
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
         mainPanel.add(houseHandPanel,BorderLayout.NORTH);
@@ -124,11 +134,16 @@ public class GUI extends JFrame {
     }
 
     private void initiateComponents() {
+        userHandValue = new JLabel("0");  ////
+        userHandValue.setFont(labelFont);
+        userHandValue.setForeground(brightYellow);
+
+
         language = new JButton(langugeButtonText); //SET LANGUAGE, SEN ACTIONP
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
-        betAndCapitalPanel = new JPanel(new GridLayout(3, 1));
+        betAndCapitalPanel = new JPanel(new GridLayout(4, 1));
         centerPanel = new JPanel(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
@@ -141,6 +156,7 @@ public class GUI extends JFrame {
         name = new JLabel(showPlayerNameText);
         name.setForeground(brightYellow);
         name.setFont(labelFont);
+
 
         totalCapital = new JLabel(showCapitalText);
         totalCapital.setForeground(brightYellow);
