@@ -13,6 +13,7 @@ public class GUI extends JFrame {
     public JButton newCard;
     public JButton rules;
     public JButton exit;
+    public JButton language;
 
     private ImageIcon cardBack;
 
@@ -50,13 +51,14 @@ public class GUI extends JFrame {
     private String showPlayerNameText =  "Player:";
     private String showCapitalText = "Total capital:";
     private String showCurrentBetText = "Current bet:";
-    private String rulesTitleText =  "Black Jack-regler";
     private String showRulesText = "Rules";
+    private String rulesTitleText =  "Black Jack rules";
     private String drawCardText =  "Hit me!";
     private String newGameText = "New Game";
     private String stopText = "Stop";
     private String exitText =  "Exit";
     private String instructionsText = "";
+    private String langugeButtonText = "Svenska";
 
 
 
@@ -82,6 +84,7 @@ public class GUI extends JFrame {
         buttonPanel.add(newGame);
         buttonPanel.add(rules);
         buttonPanel.add(exit);
+        buttonPanel.add(language);
         buttonPanel.setOpaque(false);
         centerPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -121,6 +124,7 @@ public class GUI extends JFrame {
     }
 
     private void initiateComponents() {
+        language = new JButton(langugeButtonText); //SET LANGUAGE, SEN ACTIONP
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
@@ -189,7 +193,7 @@ public class GUI extends JFrame {
 
     public void setTotalCapital(int capital) {
         String s = showCapitalText;
-        totalCapital.setText(s + capital);
+        totalCapital.setText(s + " " + capital);
     }
 
     public void setCurrentBet(int bet) {
