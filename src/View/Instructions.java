@@ -15,7 +15,7 @@ public enum Instructions {
         this.instruction = instruction;
     }
 
-    public String getInstruction() {
+    public String getInstructionSV() {
         return instruction;
     }
 }

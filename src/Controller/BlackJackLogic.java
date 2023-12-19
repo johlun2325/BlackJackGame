@@ -53,15 +53,12 @@ public class BlackJackLogic implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //alla händelser från gui med implementerad logik
-        //todo: lyssnare på field med anv.namn och kapital
-        //todo: knapp med lyssnare för ta emot insats fr anv
 
         if (e.getSource() == gui.newCard) {
             userDrawCard();
             gui.updateUserHandImages(getCardImages(getUser()));
             if (user.getHandValue()== -1) {
-                gui.updateInstructions(Instructions.BUSTED.getInstruction());
+                gui.updateInstructions(Instructions.BUSTED.getInstructionSV());
                 JOptionPane.showMessageDialog(null, "You're bust!");
                 gui.newCard.setEnabled(false);
                 gui.noMoreCards.setEnabled(false);
@@ -104,7 +101,7 @@ public class BlackJackLogic implements ActionListener {
         if (deckOfCards.getDeckOfCards().size() > 15) {
             deckOfCards.createCardsFromFactory();
         }
-        gui.updateInstructions(Instructions.PLACE_BET.getInstruction());
+        gui.updateInstructions(Instructions.PLACE_BET.getInstructionSV());
         gui.newRoundLayout();
         gui.newCard.setEnabled(true);
         gui.noMoreCards.setEnabled(true);
@@ -127,7 +124,7 @@ public class BlackJackLogic implements ActionListener {
             gui.setTotalCapital(user.getCurrentCapital());
         }
         gui.setCurrentBet(currentBet);
-        gui.updateInstructions(Instructions.DECIDE_NEXT_MOVE.getInstruction());
+        gui.updateInstructions(Instructions.DECIDE_NEXT_MOVE.getInstructionSV());
     }
 
     public List<JLabel> getCardImages(Player player) {
@@ -153,15 +150,15 @@ public class BlackJackLogic implements ActionListener {
     public EndOfRound calculateWinner() {
 
         if (user.getHandValue() > house.getHandValue()) {
-            gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
+            gui.updateInstructions(Instructions.WON_ROUND.getInstructionSV());
             return EndOfRound.WIN;
 
         } else if (user.getHandValue() < house.getHandValue()) {
-            gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
+            gui.updateInstructions(Instructions.LOST_ROUND.getInstructionSV());
             return EndOfRound.LOSE;
 
         } else {
-            gui.updateInstructions(Instructions.DRAW_ROUND.getInstruction());
+            gui.updateInstructions(Instructions.DRAW_ROUND.getInstructionSV());
             return EndOfRound.DRAW;
         }
     }

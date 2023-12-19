@@ -34,20 +34,39 @@ public class GUI extends JFrame {
 
     private JPanel mainPanel;
 
-    private Color brightYellow = new Color(255, 200, 0);
-    private Color lightYellow = new Color(255, 235, 150);
-    Font instructionsFont = new Font("Rockwell Condensed", Font.BOLD, 18);
-    Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
-    Font rulesFont = new Font("Arial", Font.BOLD, 14);
+    private final Color brightYellow = new Color(255, 200, 0);
+    private final Color lightYellow = new Color(255, 235, 150);
+    private final Font instructionsFont = new Font("Rockwell Condensed", Font.BOLD, 18);
+    private final Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
+    private final Font rulesFont = new Font("Arial", Font.BOLD, 14);
+
+    private final String gameTitle = "Black Jack";
+    private final String cardBackFilePath = "src/Cards/Background/cardBack_blue2.png";
+    private final String backgroundFilePath = "src/Background/background.jpg";
+    private final String rulesFilePath = "src/rules.txt";
+
+
+    //Text with properties
+    private String showPlayerNameText =  "Player:";
+    private String showCapitalText = "Total capital:";
+    private String showCurrentBetText = "Current bet:";
+    private String rulesTitleText =  "Black Jack-regler";
+    private String showRulesText = "Rules";
+    private String drawCardText =  "Hit me!";
+    private String newGameText = "New Game";
+    private String stopText = "Stop";
+    private String exitText =  "Exit";
+    private String instructionsText = "";
+
 
 
     public GUI() {
-        initiateComponents(); // initierar alla komponenter
-        addComponents(); //adderar komponenter till varandra
+        initiateComponents();
+        addComponents();
         this.setLayout(new BorderLayout());
-        this.add(mainPanel,BorderLayout.CENTER); //mainPanel har resterande komponenter på sig
+        this.add(mainPanel,BorderLayout.CENTER);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setTitle("Black Jack");
+        this.setTitle(gameTitle);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -66,7 +85,8 @@ public class GUI extends JFrame {
         buttonPanel.setOpaque(false);
         centerPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        instructions.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrera instruktionerna
+
+        instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
@@ -87,9 +107,8 @@ public class GUI extends JFrame {
         mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
     }
 
-
     private void createMainPanel() {
-        ImageIcon backgroundImage = new ImageIcon("src/Background/background.jpg");
+        ImageIcon backgroundImage = new ImageIcon(backgroundFilePath);
         mainPanel = new JPanel(new BorderLayout()){
             @Override
             protected void paintComponent(Graphics g) {
@@ -101,40 +120,39 @@ public class GUI extends JFrame {
         mainPanel.setOpaque(false);
     }
 
-
     private void initiateComponents() {
-        newCard = new JButton("Hit me!");
-        noMoreCards = new JButton("Stop!");
-        newGame = new JButton("New game");
-        rules = new JButton("Rules");
-        exit = new JButton("Exit");
-
-        instructions = new JLabel(" ");
-        instructions.setFont(instructionsFont);
-        instructions.setForeground(brightYellow);
-        instructions.setHorizontalAlignment(JLabel.CENTER);
-
-        cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
-        cardBackLabel = new JLabel(cardBack);
-
-        name = new JLabel("Player name: ");
-        name.setForeground(brightYellow);
-        name.setFont(labelFont);
-
-        totalCapital = new JLabel("Total Capital: ");
-        totalCapital.setForeground(brightYellow);
-        totalCapital.setFont(labelFont);
-
-        currentBet = new JLabel("Current Bet: ");
-        currentBet.setForeground(brightYellow);
-        currentBet.setFont(labelFont);
-
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
         betAndCapitalPanel = new JPanel(new GridLayout(3, 1));
-        centerPanel = new JPanel();
+        centerPanel = new JPanel(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+
+        newCard = new JButton(drawCardText);
+        noMoreCards = new JButton(stopText);
+        newGame = new JButton(newGameText);
+        rules = new JButton(showRulesText);
+        exit = new JButton(exitText);
+
+        name = new JLabel(showPlayerNameText);
+        name.setForeground(brightYellow);
+        name.setFont(labelFont);
+
+        totalCapital = new JLabel(showCapitalText);
+        totalCapital.setForeground(brightYellow);
+        totalCapital.setFont(labelFont);
+
+        currentBet = new JLabel(showCurrentBetText);
+        currentBet.setForeground(brightYellow);
+        currentBet.setFont(labelFont);
+
+        instructions = new JLabel(instructionsText);
+        instructions.setFont(instructionsFont);
+        instructions.setForeground(brightYellow);
+        instructions.setHorizontalAlignment(JLabel.CENTER);
+
+        cardBack = new ImageIcon(cardBackFilePath);
+        cardBackLabel = new JLabel(cardBack);
 
         createMainPanel();
     }
@@ -170,18 +188,17 @@ public class GUI extends JFrame {
 
 
     public void setTotalCapital(int capital) {
-        String s = "Total Capital: ";
+        String s = showCapitalText;
         totalCapital.setText(s + capital);
     }
 
     public void setCurrentBet(int bet) {
-        String s = "Current Bet: ";
-        currentBet.setText(s+bet);
+        currentBet.setText(showCurrentBetText+ " " + bet);
     }
 
 
     public void setPlayerName(String playerName) {
-        name.setText("Player: " + playerName);
+        name.setText(showPlayerNameText + " " +  playerName);
     }
 
 
@@ -190,13 +207,13 @@ public class GUI extends JFrame {
             return new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (IOException e) {
             e.printStackTrace();
-            return "Kunde inte läsa in reglerna.";
+            return "Cannot read file path";
         }
     }
 
 
     public void showRules() {
-        String rulesText = readRulesFromFile("src/rules.txt");
+        String rulesText = readRulesFromFile(rulesFilePath);
 
         this.rulesText = new JTextArea(rulesText);
         this.rulesText.setEditable(false);
@@ -210,7 +227,7 @@ public class GUI extends JFrame {
         scrollPane.setPreferredSize(new Dimension(500, 350));
 
         dialog = new JDialog();
-        dialog.setTitle("Black Jack-regler");
+        dialog.setTitle(rulesTitleText); //P
         dialog.add(scrollPane);
 
         dialog.pack();

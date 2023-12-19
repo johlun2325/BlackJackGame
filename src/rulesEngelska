@@ -1,0 +1,32 @@
+
+The objective of the game
+
+The objective of Blackjack is to beat the dealer (sometimes referred to as the "house") by having a hand with a total value as close to 21 as possible without exceeding it. If the hand's value exceeds 21, the player automatically loses the round.
+
+Card values
+
+Numbered cards (2 to 10) are worth their face value (e.g., a 7 is worth 7 points).
+Jack, Queen, King (face cards) are worth 10 points each.
+Aces can be worth either 1 or 11 points, depending on what is more advantageous for the player's hand.
+
+Gameplay
+
+The player chooses an amount to bet.
+
+Each player, including the dealer, receives two cards. One of the dealer's cards is face up.
+
+Player's turn: The player now has several options:
+
+Hit (take a card): The player requests an additional card to increase the hand's total value.
+Stand: The player is satisfied with the current value of the hand and does not want more cards.
+Double down: The player doubles their original bet and receives only one additional card (not applicable in this simplified version of the game).
+Split: If the player has two cards of the same value, they can be split into two separate hands, with a separate bet for each hand (not applicable in this simplified version of the game).
+Surrender: In some variants of the game, the player can choose to give up half of their bet and end the round (not applicable in this simplified version of the game).
+Dealer's turn: When all players have completed their turns, the dealer reveals their hidden card and plays according to established rules (usually taking cards until the hand's total value is 17 or higher).
+
+Evaluation of hands
+
+If the player's hand is closer to 21 than the dealer's hand without exceeding 21, the player wins.
+If the dealer goes over 21 but not the player, the player wins.
+If both the player's and dealer's hands have the same value, it is a tie (push/draw), and the player gets back their bet.
+If the player's hand exceeds 21, they lose.
