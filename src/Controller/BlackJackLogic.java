@@ -110,9 +110,10 @@ public class BlackJackLogic implements ActionListener {
         gui.newCard.setEnabled(true);
         gui.noMoreCards.setEnabled(true);
         discardAllHands();
-        dealCardsAtStartOfRound();
         updateAllHandImages();
         placeBet();
+        dealCardsAtStartOfRound();
+        updateAllHandImages();
     }
 
     private void placeBet() {
