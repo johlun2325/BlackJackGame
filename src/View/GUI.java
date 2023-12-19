@@ -150,7 +150,7 @@ public class GUI extends JFrame {
     }
 
 
-    public void removeUpsideDownCard() {
+    public void removeHouseCards() {
         houseHandPanel.removeAll();
     }
 
