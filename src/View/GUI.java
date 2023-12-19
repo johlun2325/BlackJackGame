@@ -14,6 +14,8 @@ public class GUI extends JFrame {
     public JButton rules;
     public JButton exit;
 
+    private ImageIcon cardBack;
+
     private JLabel cardBackLabel;
     private JLabel totalCapital;
     private JLabel currentBet;
@@ -21,37 +23,29 @@ public class GUI extends JFrame {
     private JLabel instructions;
 
     private JPanel buttonPanel;
-    private JPanel userHandPanel;
+    protected JPanel userHandPanel;
     private JPanel houseHandPanel;
     private JPanel betAndCapitalPanel;
     private JPanel centerPanel;
-    private JPanel mainPanel;
 
     private JDialog dialog;
     private JScrollPane scrollPane;
     private JTextArea rulesText;
 
-    private ImageIcon cardBack;
+    private JPanel mainPanel;
 
     private Color brightYellow = new Color(255, 200, 0);
     private Color lightYellow = new Color(255, 235, 150);
-
-    private static final String RULES_FILE_PATH = "src/rules.txt";
-    private static final String CARD_BACK_FILE_PATH = "src/Cards/Background/cardBack_blue2.png";
-    private static final String FONT_NAME = "Rockwell Condensed";
-    private static final String FONT_RULES = "Arial";
-    private static final String BACKGROUND_FILE_PATH = "src/Background/background.jpg";
+    Font instructionsFont = new Font("Rockwell Condensed", Font.BOLD, 18);
+    Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
+    Font rulesFont = new Font("Arial", Font.BOLD, 14);
 
 
     public GUI() {
-        initiateComponents();
-        addComponents();
-        setFrame();
-    }
-
-    private void setFrame(){
+        initiateComponents(); // initierar alla komponenter
+        addComponents(); //adderar komponenter till varandra
         this.setLayout(new BorderLayout());
-        this.add(mainPanel, BorderLayout.CENTER); //mainPanel har resterande komponenter på sig
+        this.add(mainPanel,BorderLayout.CENTER); //mainPanel har resterande komponenter på sig
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Black Jack");
         this.setLocationRelativeTo(null);
@@ -59,6 +53,8 @@ public class GUI extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
     }
+
+
     private void addComponents() {
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
@@ -68,13 +64,12 @@ public class GUI extends JFrame {
         buttonPanel.add(rules);
         buttonPanel.add(exit);
         buttonPanel.setOpaque(false);
+        centerPanel.setOpaque(false);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+        instructions.setAlignmentX(Component.CENTER_ALIGNMENT); // Centrera instruktionerna
 
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
-        centerPanel.setOpaque(false);
 
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
@@ -86,23 +81,16 @@ public class GUI extends JFrame {
 
         userHandPanel.setOpaque(false);
 
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
-        mainPanel.add(houseHandPanel, BorderLayout.NORTH);
-        mainPanel.add(betAndCapitalPanel, BorderLayout.WEST);
+        mainPanel.add(houseHandPanel,BorderLayout.NORTH);
+        mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
     }
-    private void initiateComponents() {
-        name = new JLabel();
-        initiateInstructionComponents();
-        initiatePanels();
-        initiateButtonComponents();
-        initiateBetComponents();
-        initiateCardBackComponents();
-        createMainPanel();
-    }
+
+
     private void createMainPanel() {
-        ImageIcon backgroundImage = new ImageIcon(BACKGROUND_FILE_PATH);
-        mainPanel = new JPanel(new BorderLayout()) {
+        ImageIcon backgroundImage = new ImageIcon("src/Background/background.jpg");
+        mainPanel = new JPanel(new BorderLayout()){
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -112,40 +100,46 @@ public class GUI extends JFrame {
         };
         mainPanel.setOpaque(false);
     }
-    private void initiateButtonComponents() {
 
+
+    private void initiateComponents() {
         newCard = new JButton("Hit me!");
         noMoreCards = new JButton("Stop!");
         newGame = new JButton("New game");
         rules = new JButton("Rules");
         exit = new JButton("Exit");
-    }
-    private void initiateInstructionComponents() {
+
         instructions = new JLabel(" ");
-        instructions.setFont(new Font(FONT_NAME, Font.BOLD, 18));
+        instructions.setFont(instructionsFont);
         instructions.setForeground(brightYellow);
         instructions.setHorizontalAlignment(JLabel.CENTER);
-    }
-    private void initiatePanels() {
+
+        cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
+        cardBackLabel = new JLabel(cardBack);
+
+        name = new JLabel("Player name: ");
+        name.setForeground(brightYellow);
+        name.setFont(labelFont);
+
+        totalCapital = new JLabel("Total Capital: ");
+        totalCapital.setForeground(brightYellow);
+        totalCapital.setFont(labelFont);
+
+        currentBet = new JLabel("Current Bet: ");
+        currentBet.setForeground(brightYellow);
+        currentBet.setFont(labelFont);
+
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
         betAndCapitalPanel = new JPanel(new GridLayout(3, 1));
         centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+
+        createMainPanel();
     }
-    private void initiateBetComponents() {
-        totalCapital = new JLabel("Total Capital: ");
-        totalCapital.setForeground(brightYellow);
-        totalCapital.setFont(new Font(FONT_NAME, Font.BOLD, 14));
-        currentBet = new JLabel("Current Bet: ");
-        currentBet.setForeground(brightYellow);
-        currentBet.setFont(new Font(FONT_NAME, Font.BOLD, 14));
-    }
-    private void initiateCardBackComponents() {
-        cardBack = new ImageIcon(CARD_BACK_FILE_PATH);
-        cardBackLabel = new JLabel(cardBack);
-    }
+
+
     public void updateUserHandImages(List<JLabel> cardImages) {
         userHandPanel.removeAll();
         for (JLabel cardImage : cardImages) {
@@ -154,9 +148,12 @@ public class GUI extends JFrame {
         revalidate();
         repaint();
     }
-    public void removeHouseCards() {
+
+
+    public void removeUpsideDownCard() {
         houseHandPanel.removeAll();
     }
+
     public void updateHouseHandImages(List<JLabel> cardImages) {
         for (JLabel cardImage : cardImages) {
             houseHandPanel.add(cardImage);
@@ -164,17 +161,22 @@ public class GUI extends JFrame {
         revalidate();
         repaint();
     }
+
+
     public void newRoundLayout() {
         houseHandPanel.removeAll();
         houseHandPanel.add(cardBackLabel);
     }
+
+
     public void setTotalCapital(int capital) {
         String s = "Total Capital: ";
         totalCapital.setText(s + capital);
     }
+
     public void setCurrentBet(int bet) {
         String s = "Current Bet: ";
-        currentBet.setText(s + bet);
+        currentBet.setText(s+bet);
     }
 
 
@@ -191,8 +193,10 @@ public class GUI extends JFrame {
             return "Kunde inte läsa in reglerna.";
         }
     }
+
+
     public void showRules() {
-        String rulesText = readRulesFromFile(RULES_FILE_PATH);
+        String rulesText = readRulesFromFile("src/rules.txt");
 
         this.rulesText = new JTextArea(rulesText);
         this.rulesText.setEditable(false);
@@ -200,7 +204,7 @@ public class GUI extends JFrame {
         this.rulesText.setLineWrap(true);
         this.rulesText.setCaretPosition(0);
         this.rulesText.setBackground(lightYellow);
-        this.rulesText.setFont(new Font(FONT_RULES, Font.BOLD, 14)); ///////////////////
+        this.rulesText.setFont(rulesFont);
 
         scrollPane = new JScrollPane(this.rulesText);
         scrollPane.setPreferredSize(new Dimension(500, 350));
@@ -213,9 +217,12 @@ public class GUI extends JFrame {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
-    public void updateInstructions(String instruction) {
-        instructions.setText(instruction);
+
+
+    public void updateInstructions(String instruction){
+       instructions.setText(instruction);
     }
+
 }
 
 
