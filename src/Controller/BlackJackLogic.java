@@ -75,11 +75,11 @@ public class BlackJackLogic implements ActionListener {
                 houseDrawCard();
                 gui.updateHouseHandImages(getCardImages(getHouse()));
 
+
             }
 
             switch (calculateWinner()) {
-                case WIN ->
-                        JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
+                case WIN -> JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
                 case LOSE -> JOptionPane.showMessageDialog(null, EndOfRound.LOSE.getEndOfRound());
                 case DRAW -> JOptionPane.showMessageDialog(null, EndOfRound.DRAW.getEndOfRound());
             }
@@ -122,7 +122,7 @@ public class BlackJackLogic implements ActionListener {
             try {
                 int bet = Integer.parseInt(answer);
 
-                if (bet < currentCapital) {
+                if (bet <= currentCapital) {
                     currentBet = bet;
                     user.subractBetFromCapital(bet);
                     gui.setTotalCapital(user.getCurrentCapital());
@@ -152,7 +152,7 @@ public class BlackJackLogic implements ActionListener {
 
     public void setUserValues() {
         userName = JOptionPane.showInputDialog("Enter player name: ");
-        String capital = JOptionPane.showInputDialog("Enter capital: "); //ev kontroll loop här ist.
+        String capital = JOptionPane.showInputDialog("Enter capital: ");
         currentBet = 0;
         try {
             currentCapital = Integer.parseInt(capital);
@@ -165,22 +165,29 @@ public class BlackJackLogic implements ActionListener {
         boolean userBust = user.getHandValue() > 21;
         boolean houseBust = house.getHandValue() > 21;
 
+        EndOfRound result;
+
         if (userBust) {
             gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
-            return EndOfRound.LOSE;
+            result = EndOfRound.LOSE;
         } else if (houseBust) {
             gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
-            return EndOfRound.WIN;
+            payOutWinnings();
+            result = EndOfRound.WIN;
         } else if (user.getHandValue() > house.getHandValue()) {
             gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
-            return EndOfRound.WIN;
+            payOutWinnings();
+            result = EndOfRound.WIN;
         } else if (user.getHandValue() < house.getHandValue()) {
             gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
-            return EndOfRound.LOSE;
+            result = EndOfRound.LOSE;
         } else {
             gui.updateInstructions(Instructions.DRAW_ROUND.getInstruction());
-            return EndOfRound.DRAW;
+            result = EndOfRound.DRAW;
         }
+        gui.setTotalCapital(user.getCurrentCapital());
+        gui.resetCurrentBet();
+        return result;
     }
 
 
@@ -207,6 +214,7 @@ public class BlackJackLogic implements ActionListener {
         user.addToTotalCapital(winnings);
         return winnings;
     }
+
 
     public List<Card> getUserCards() {
         return user.getCurrentHand();

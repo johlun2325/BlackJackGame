@@ -222,7 +222,11 @@ public class GUI extends JFrame {
 
     public void setCurrentBet(int bet) {
         String s = "Current Bet: ";
-        currentBet.setText(s+bet);
+        currentBet.setText(s + bet);
+    }
+
+    public void resetCurrentBet(){
+        currentBet.setText("");
     }
 
 
