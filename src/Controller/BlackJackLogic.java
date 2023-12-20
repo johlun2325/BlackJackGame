@@ -31,20 +31,22 @@ public class BlackJackLogic implements ActionListener {
 
         gui = new GUI();
         gui.newGame.addActionListener(this);
-        gui.noMoreCards.addActionListener(this);
-        gui.newCard.addActionListener(this);
+        gui.stop.addActionListener(this);
+        gui.drawCard.addActionListener(this);
         gui.rules.addActionListener(this);
         gui.exit.addActionListener(this);
+        gui.language.addActionListener(this);
         gui.setTotalCapital(currentCapital);
         gui.setPlayerName(userName);
         nextRound();
 
     }
 
-    public void showUserHandValue(){
+    public void showUserHandValue() {
         int sum = user.getHandValue();
         gui.setCurrentHandValue(String.valueOf(sum));
     }
+
     public void discardAllHands() {
         user.discardHand();
         house.discardHand();
@@ -58,22 +60,23 @@ public class BlackJackLogic implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if (e.getSource() == gui.newCard) {
+        if (e.getSource() == gui.drawCard) {
             userDrawCard();
             gui.updateUserHandImages(getCardImages(getUser()));
+            showUserHandValue();
             if (user.getHandValue() == -1) {
                 gui.updateInstructions(Instructions.BUSTED.getInstructionSV());
                 JOptionPane.showMessageDialog(null, "You're bust!");
-                gui.newCard.setEnabled(false);
-                gui.noMoreCards.setEnabled(false);
+                gui.drawCard.setEnabled(false);
+                gui.stop.setEnabled(false);
                 //nextRound();
 
             }
 
-        } else if (e.getSource() == gui.noMoreCards) {
+        } else if (e.getSource() == gui.stop) {
             gui.removeHouseCards();
-            gui.newCard.setEnabled(false);
-            gui.noMoreCards.setEnabled(false);
+            gui.drawCard.setEnabled(false);
+            gui.stop.setEnabled(false);
             while (getHouse().getHandValue() < 17 && getHouse().getHandValue() > 0) {
                 System.out.println(getHouse().getHandValue());
                 System.out.println(getHouse().getCurrentHand());
@@ -95,10 +98,15 @@ public class BlackJackLogic implements ActionListener {
         } else if (e.getSource() == gui.rules) {
             gui.showRules();
 
+        } else if (e.getSource() == gui.language) {
+            System.out.println("togglar språket");
+            LanguageManager.toggleLanguage();
+            gui.updateTextOnButtons();
+
+
         } else if (e.getSource() == gui.exit) {
             System.exit(0);
         }
-
 
     }
 
@@ -108,8 +116,8 @@ public class BlackJackLogic implements ActionListener {
         }
         gui.updateInstructions(Instructions.PLACE_BET.getInstructionSV());
         gui.newRoundLayout();
-        gui.newCard.setEnabled(true);
-        gui.noMoreCards.setEnabled(true);
+        gui.drawCard.setEnabled(true);
+        gui.stop.setEnabled(true);
         discardAllHands();
         updateAllHandImages();
         placeBet();

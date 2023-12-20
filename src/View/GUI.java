@@ -11,11 +11,11 @@ import java.util.List;
 
 public class GUI extends JFrame {
     public JButton newGame;
-    public JButton noMoreCards;
-    public JButton newCard;
+    public JButton stop;
+    public JButton drawCard;
     public JButton rules;
     public JButton exit;
-    public JButton language;
+    public JButton language; //
 
     private ImageIcon cardBack;
 
@@ -49,30 +49,29 @@ public class GUI extends JFrame {
     private final String backgroundFilePath = "src/Background/background.jpg";
     private final String rulesFilePath = "src/rules.txt";
 
-
     //Text with properties
-    private String showPlayerNameText =  "Player:";
-    private String showCapitalText = "Total capital:";
-    private String showCurrentBetText = "Current bet:";
-    private String showRulesText = "Rules";
-    private String rulesTitleText =  "Black Jack rules";
-    private String drawCardText =  "Hit me!";
-    private String newGameText = "New Game";
-    private String stopText = "Stop";
-    private String exitText =  "";
-    private String instructionsText = "";
-    private String langugeButtonText = "Svenska";
-    private String handValue = "Hand value";
+    private String showPlayerNameText;
+    private String showCapitalText;
+    private String showCurrentBetText;
+    private String showRulesText;
+    private String rulesTitleText;
+    private String drawCardText;
+    private String newGameText;
+    private String languageButtonText;
+    private String handValue;
+    private String stopText;
+    private String exitText;
+    private String instructionsText;
 
 
     public GUI() {
-//        LanguageManager.setLanguage("en"); // setting initial language
-//        exitText = LanguageManager.getMessage(exitText);
+        LanguageManager.setLanguage("sv"); // setting initial language
 
+        setInitialTextToComponents();
         initiateComponents();
         addComponents();
         this.setLayout(new BorderLayout());
-        this.add(mainPanel,BorderLayout.CENTER);
+        this.add(mainPanel, BorderLayout.CENTER);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle(gameTitle);
         this.setLocationRelativeTo(null);
@@ -80,16 +79,51 @@ public class GUI extends JFrame {
         this.setResizable(false);
         this.setVisible(true);
     }
-    public void setCurrentHandValue(String value){
 
-        userHandValue.setText(handValue + value);
+
+
+    public void setInitialTextToComponents() {
+        rulesTitleText = LanguageManager.getMessage("rulesTitleText");
+        instructionsText = "";
+
+        //labels
+        showPlayerNameText = LanguageManager.getMessage("showPlayerNameText");
+        showCapitalText = LanguageManager.getMessage("showCapitalText");
+        showCurrentBetText = LanguageManager.getMessage("showCurrentBetText");
+        handValue = LanguageManager.getMessage("handValue");
+
+        //buttons
+        drawCardText = LanguageManager.getMessage("drawCardText");
+        showRulesText = LanguageManager.getMessage("showRulesText");
+        newGameText = LanguageManager.getMessage("newGameText");
+        languageButtonText = LanguageManager.getMessage("languageButtonText");
+        stopText = LanguageManager.getMessage("stopText");
+        exitText = LanguageManager.getMessage("exitText");
+    }
+
+    public void updateTextOnButtons(){
+        //buttons
+        drawCard.setText(LanguageManager.getMessage("drawCardText"));
+        exit.setText(LanguageManager.getMessage("exitText"));
+        stop.setText(LanguageManager.getMessage("stopText"));
+        language.setText(LanguageManager.getMessage("languageButtonText"));
+        newGame.setText(LanguageManager.getMessage("newGameText"));
+        rules.setText(LanguageManager.getMessage("showRulesText"));
+
+        repaint();
+        revalidate();
+    }
+
+    public void setCurrentHandValue(String value) {
+
+        userHandValue.setText(handValue + " " + value);
     }
 
     private void addComponents() {
         centerPanel.add(buttonPanel);
         centerPanel.add(instructions);
-        buttonPanel.add(newCard);
-        buttonPanel.add(noMoreCards);
+        buttonPanel.add(drawCard);
+        buttonPanel.add(stop);
         buttonPanel.add(newGame);
         buttonPanel.add(rules);
         buttonPanel.add(exit);
@@ -114,15 +148,15 @@ public class GUI extends JFrame {
         betAndCapitalPanel.add(userHandValue);
 
         userHandPanel.setOpaque(false);
-        mainPanel.add(centerPanel,BorderLayout.CENTER);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
-        mainPanel.add(houseHandPanel,BorderLayout.NORTH);
-        mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
+        mainPanel.add(houseHandPanel, BorderLayout.NORTH);
+        mainPanel.add(betAndCapitalPanel, BorderLayout.WEST);
     }
 
     private void createMainPanel() {
         ImageIcon backgroundImage = new ImageIcon(backgroundFilePath);
-        mainPanel = new JPanel(new BorderLayout()){
+        mainPanel = new JPanel(new BorderLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -134,12 +168,27 @@ public class GUI extends JFrame {
     }
 
     private void initiateComponents() {
+
+        instructionsText = "";
+        //labels
+        instructions = new JLabel("");
+        currentBet = new JLabel(showCurrentBetText);
+        name = new JLabel(showPlayerNameText);
+        totalCapital = new JLabel(showCapitalText);
+        //buttons
+        language = new JButton(languageButtonText);
+        newGame = new JButton(newGameText);
+        drawCard = new JButton(drawCardText);
+        stop = new JButton(stopText);
+        rules = new JButton(showRulesText);
+        exit = new JButton(exitText);
+
+
         userHandValue = new JLabel("0");  ////
         userHandValue.setFont(labelFont);
         userHandValue.setForeground(brightYellow);
 
 
-        language = new JButton(langugeButtonText); //SET LANGUAGE, SEN ACTIONP
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
@@ -147,26 +196,16 @@ public class GUI extends JFrame {
         centerPanel = new JPanel(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
-        newCard = new JButton(drawCardText);
-        noMoreCards = new JButton(stopText);
-        newGame = new JButton(newGameText);
-        rules = new JButton(showRulesText);
-        exit = new JButton(exitText);
-
-        name = new JLabel(showPlayerNameText);
         name.setForeground(brightYellow);
         name.setFont(labelFont);
 
 
-        totalCapital = new JLabel(showCapitalText);
         totalCapital.setForeground(brightYellow);
         totalCapital.setFont(labelFont);
 
-        currentBet = new JLabel(showCurrentBetText);
         currentBet.setForeground(brightYellow);
         currentBet.setFont(labelFont);
 
-        instructions = new JLabel(instructionsText);
         instructions.setFont(instructionsFont);
         instructions.setForeground(brightYellow);
         instructions.setHorizontalAlignment(JLabel.CENTER);
@@ -213,12 +252,12 @@ public class GUI extends JFrame {
     }
 
     public void setCurrentBet(int bet) {
-        currentBet.setText(showCurrentBetText+ " " + bet);
+        currentBet.setText(showCurrentBetText + " " + bet);
     }
 
 
     public void setPlayerName(String playerName) {
-        name.setText(showPlayerNameText + " " +  playerName);
+        name.setText(showPlayerNameText + " " + playerName);
     }
 
 
@@ -256,8 +295,8 @@ public class GUI extends JFrame {
     }
 
 
-    public void updateInstructions(String instruction){
-       instructions.setText(instruction);
+    public void updateInstructions(String instruction) {
+        instructions.setText(instruction);
     }
 
 }

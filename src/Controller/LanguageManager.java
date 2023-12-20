@@ -5,13 +5,20 @@ import java.util.ResourceBundle;
 
 public class LanguageManager {
     private static ResourceBundle messages;
+    private static String currentLanguage = "sv";
 
     public static void setLanguage(String languageCode){
-        Locale locale = new Locale(languageCode);
-        messages = ResourceBundle.getBundle("messages", locale);
+        System.out.println(currentLanguage);
+        currentLanguage = languageCode;
+        messages = ResourceBundle.getBundle("messages", Locale.of(languageCode));
     }
 
     public static String getMessage(String key){
         return messages.getString(key);
     }
+
+    public static void toggleLanguage() {
+        setLanguage(currentLanguage.equals("sv") ? "en" : "sv");
+    }
+
 }
