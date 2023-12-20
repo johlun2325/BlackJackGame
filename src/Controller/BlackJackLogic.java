@@ -54,10 +54,6 @@ public class BlackJackLogic implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //alla händelser från gui med implementerad logik
-        //todo: lyssnare på field med anv.namn och kapital
-        //todo: knapp med lyssnare för ta emot insats fr anv
-
         if (e.getSource() == gui.newCard) {
             userDrawCard();
             gui.updateUserHandImages(getCardImages(getUser()));
