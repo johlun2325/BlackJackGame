@@ -37,6 +37,7 @@ public class BlackJackLogic implements ActionListener {
         gui.exit.addActionListener(this);
         gui.setTotalCapital(currentCapital);
         gui.setPlayerName(userName);
+
         nextRound();
 
     }
@@ -57,13 +58,11 @@ public class BlackJackLogic implements ActionListener {
         if (e.getSource() == gui.newCard) {
             userDrawCard();
             gui.updateUserHandImages(getCardImages(getUser()));
-            if (user.getHandValue()== -1) {
+            if (user.getHandValue() > 21) {
                 gui.updateInstructions(Instructions.BUSTED.getInstruction());
                 JOptionPane.showMessageDialog(null, "You're bust!");
                 gui.newCard.setEnabled(false);
                 gui.noMoreCards.setEnabled(false);
-                //nextRound();
-                
             }
 
         } else if (e.getSource() == gui.noMoreCards) {
@@ -75,15 +74,16 @@ public class BlackJackLogic implements ActionListener {
                 System.out.println(getHouse().getCurrentHand());
                 houseDrawCard();
                 gui.updateHouseHandImages(getCardImages(getHouse()));
-                
+
             }
 
             switch (calculateWinner()) {
-                case WIN -> JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
+                case WIN ->
+                        JOptionPane.showMessageDialog(null, EndOfRound.WIN.getEndOfRound() + payOutWinnings() + "€");
                 case LOSE -> JOptionPane.showMessageDialog(null, EndOfRound.LOSE.getEndOfRound());
                 case DRAW -> JOptionPane.showMessageDialog(null, EndOfRound.DRAW.getEndOfRound());
             }
-            //nextRound();
+
         } else if (e.getSource() == gui.newGame) {
             nextRound();
 
@@ -94,10 +94,10 @@ public class BlackJackLogic implements ActionListener {
             System.exit(0);
         }
 
-
     }
 
-    private void nextRound(){
+    private void nextRound() {
+        gui.resetHandValues();
         if (deckOfCards.getDeckOfCards().size() > 15) {
             deckOfCards.createCardsFromFactory();
         }
@@ -110,21 +110,34 @@ public class BlackJackLogic implements ActionListener {
         placeBet();
         dealCardsAtStartOfRound();
         updateAllHandImages();
+
     }
 
     private void placeBet() {
         currentBet = 0;
         String answer = JOptionPane.showInputDialog(null, "Place your bet");
-
-        int bet = Integer.parseInt(answer); // exception vid "avbryt" option
-
-        if (bet < currentCapital) {
-            currentBet = bet;
-            user.subractBetFromCapital(bet);
-            gui.setTotalCapital(user.getCurrentCapital());
-        }
-        gui.setCurrentBet(currentBet);
         gui.updateInstructions(Instructions.DECIDE_NEXT_MOVE.getInstruction());
+
+        if (answer != null && !answer.isEmpty()) {
+            try {
+                int bet = Integer.parseInt(answer);
+
+                if (bet < currentCapital) {
+                    currentBet = bet;
+                    user.subractBetFromCapital(bet);
+                    gui.setTotalCapital(user.getCurrentCapital());
+                    gui.updateInstructions(Instructions.DECIDE_NEXT_MOVE.getInstruction());
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Insatsen kan inte vara större än ditt kapital.");
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Ange en giltig summa att satsa.");
+            }
+
+            gui.setCurrentBet(currentBet);
+            gui.updateInstructions(Instructions.DECIDE_NEXT_MOVE.getInstruction());
+        }
     }
 
     public List<JLabel> getCardImages(Player player) {
@@ -149,34 +162,44 @@ public class BlackJackLogic implements ActionListener {
     }
 
     public EndOfRound calculateWinner() {
+        boolean userBust = user.getHandValue() > 21;
+        boolean houseBust = house.getHandValue() > 21;
 
-        if (user.getHandValue() > house.getHandValue()) {
+        if (userBust) {
+            gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
+            return EndOfRound.LOSE;
+        } else if (houseBust) {
             gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
             return EndOfRound.WIN;
-
+        } else if (user.getHandValue() > house.getHandValue()) {
+            gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
+            return EndOfRound.WIN;
         } else if (user.getHandValue() < house.getHandValue()) {
             gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
             return EndOfRound.LOSE;
-
         } else {
             gui.updateInstructions(Instructions.DRAW_ROUND.getInstruction());
             return EndOfRound.DRAW;
         }
     }
 
+
     public void houseDrawCard() {
         house.drawCard(deckOfCards.dealCard());
+        gui.updateHouseHandValue(house.getHandValue());
     }
 
     public void userDrawCard() {
         user.drawCard(deckOfCards.dealCard());
+        gui.updateUserHandValue(user.getHandValue());
     }
 
     public void dealCardsAtStartOfRound() {
         user.drawCard(deckOfCards.dealCard());
         house.drawCard(deckOfCards.dealCard());
         user.drawCard(deckOfCards.dealCard());
-
+        gui.updateUserHandValue(user.getHandValue());
+        gui.updateHouseHandValue(house.getHandValue());
     }
 
     public int payOutWinnings() {
@@ -184,6 +207,7 @@ public class BlackJackLogic implements ActionListener {
         user.addToTotalCapital(winnings);
         return winnings;
     }
+
     public List<Card> getUserCards() {
         return user.getCurrentHand();
     }
