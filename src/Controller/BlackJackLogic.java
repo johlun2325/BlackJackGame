@@ -46,6 +46,7 @@ public class BlackJackLogic implements ActionListener {
         house.discardHand();
     }
 
+
     public void updateAllHandImages() {
         gui.updateUserHandImages(getCardImages(getUser()));
         gui.updateHouseHandImages(getCardImages(getHouse()));
