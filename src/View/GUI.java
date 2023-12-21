@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GUI extends JFrame {
+
     public JButton newGame;
     public JButton noMoreCards;
     public JButton newCard;
@@ -19,14 +20,22 @@ public class GUI extends JFrame {
     private JLabel cardBackLabel;
     private JLabel totalCapital;
     private JLabel currentBet;
-    private JLabel name;
+    private JTextArea statistics;
+
     private JLabel instructions;
 
+    private JLabel userHandValueText;
+    private JLabel userHandValue;
+    private JLabel emptySpace;
+    private JLabel houseHandValueText;
+    private JLabel houseHandValue;
+
     private JPanel buttonPanel;
-    protected JPanel userHandPanel;
+    private JPanel userHandPanel;
     private JPanel houseHandPanel;
     private JPanel betAndCapitalPanel;
     private JPanel centerPanel;
+    private JPanel handValuePanel;
 
     private JDialog dialog;
     private JScrollPane scrollPane;
@@ -36,16 +45,18 @@ public class GUI extends JFrame {
 
     private Color brightYellow = new Color(255, 200, 0);
     private Color lightYellow = new Color(255, 235, 150);
-    Font instructionsFont = new Font("Rockwell Condensed", Font.BOLD, 18);
-    Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
-    Font rulesFont = new Font("Arial", Font.BOLD, 14);
+
+    private Font handValueFont = new Font("Rockwell Condensed", Font.BOLD, 24);
+    private Font instructionsFont = new Font("Rockwell Condensed", Font.BOLD, 18);
+    private Font labelFont = new Font("Rockwell Condensed", Font.BOLD, 14);
+    private Font rulesFont = new Font("Arial", Font.BOLD, 14);
 
 
     public GUI() {
-        initiateComponents(); // initierar alla komponenter
-        addComponents(); //adderar komponenter till varandra
+        initiateComponents();
+        addComponents();
         this.setLayout(new BorderLayout());
-        this.add(mainPanel,BorderLayout.CENTER); //mainPanel har resterande komponenter på sig
+        this.add(mainPanel,BorderLayout.CENTER);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setTitle("Black Jack");
         this.setLocationRelativeTo(null);
@@ -74,10 +85,17 @@ public class GUI extends JFrame {
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
 
-        betAndCapitalPanel.add(name);
+        betAndCapitalPanel.add(statistics);
         betAndCapitalPanel.add(totalCapital);
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
+
+        handValuePanel.add(houseHandValueText);
+        handValuePanel.add(houseHandValue);
+        handValuePanel.add(emptySpace);
+        handValuePanel.add(userHandValueText);
+        handValuePanel.add(userHandValue);
+        handValuePanel.setOpaque(false);
 
         userHandPanel.setOpaque(false);
 
@@ -85,6 +103,7 @@ public class GUI extends JFrame {
         mainPanel.add(userHandPanel, BorderLayout.SOUTH);
         mainPanel.add(houseHandPanel,BorderLayout.NORTH);
         mainPanel.add(betAndCapitalPanel,BorderLayout.WEST);
+        mainPanel.add(handValuePanel, BorderLayout.EAST);
     }
 
 
@@ -94,7 +113,6 @@ public class GUI extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                // Draw the background image
                 g.drawImage(backgroundImage.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
             }
         };
@@ -117,9 +135,16 @@ public class GUI extends JFrame {
         cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
         cardBackLabel = new JLabel(cardBack);
 
-        name = new JLabel("Player name: ");
-        name.setForeground(brightYellow);
-        name.setFont(labelFont);
+        userHandValueText = new JLabel("Player name: ");
+        userHandValueText.setForeground(brightYellow);
+        userHandValueText.setFont(labelFont);
+
+        statistics = new JTextArea("");
+        statistics.setForeground(brightYellow);
+        statistics.setFont(labelFont);
+        //statistics.setEditable(false);
+        statistics.setOpaque(false);
+       // statistics.setBorder(null);
 
         totalCapital = new JLabel("Total Capital: ");
         totalCapital.setForeground(brightYellow);
@@ -129,12 +154,29 @@ public class GUI extends JFrame {
         currentBet.setForeground(brightYellow);
         currentBet.setFont(labelFont);
 
+        houseHandValueText = new JLabel("Huset ");
+        houseHandValueText.setForeground(brightYellow);
+        houseHandValueText.setFont(handValueFont);
+        houseHandValue = new JLabel("");
+        houseHandValue.setForeground(brightYellow);
+        houseHandValue.setFont(handValueFont);
+
+        emptySpace = new JLabel();
+
+        userHandValueText = new JLabel();
+        userHandValueText.setForeground(brightYellow);
+        userHandValueText.setFont(handValueFont);
+        userHandValue = new JLabel("");
+        userHandValue.setForeground(brightYellow);
+        userHandValue.setFont(handValueFont);
+
         buttonPanel = new JPanel(new FlowLayout());
         userHandPanel = new JPanel();
         houseHandPanel = new JPanel();
         betAndCapitalPanel = new JPanel(new GridLayout(3, 1));
         centerPanel = new JPanel();
         centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+        handValuePanel = new JPanel(new GridLayout(5, 1));
 
         createMainPanel();
     }
@@ -162,6 +204,19 @@ public class GUI extends JFrame {
         repaint();
     }
 
+    public void updateUserHandValue(int handValue){
+        userHandValue.setText(Integer.toString(handValue));
+    }
+
+    public void updateHouseHandValue(int handValue){
+        houseHandValue.setText(Integer.toString(handValue));
+    }
+
+    public void resetHandValues(){
+        userHandValue.setText("");
+        houseHandValue.setText("");
+    }
+
 
     public void newRoundLayout() {
         houseHandPanel.removeAll();
@@ -176,12 +231,16 @@ public class GUI extends JFrame {
 
     public void setCurrentBet(int bet) {
         String s = "Current Bet: ";
-        currentBet.setText(s+bet);
+        currentBet.setText(s + bet);
+    }
+
+    public void resetCurrentBet(){
+        currentBet.setText("");
     }
 
 
-    public void setPlayerName(String playerName) {
-        name.setText("Player: " + playerName);
+    public void setPlayerName(String userName) {
+        userHandValueText.setText(userName);
     }
 
 
@@ -218,10 +277,14 @@ public class GUI extends JFrame {
         dialog.setVisible(true);
     }
 
-
     public void updateInstructions(String instruction){
        instructions.setText(instruction);
     }
+
+    public void updateStatistics(String statsSummary){
+        statistics.setText(statsSummary);
+    }
+
 
 }
 
