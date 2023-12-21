@@ -103,6 +103,8 @@ public class BlackJackLogic implements ActionListener {
             LanguageManager.toggleLanguage();
             gui.updateTextOnButtons();
 
+//            String rulesText = gui.readRulesFromFile(LanguageManager.getMessage("rulesFilePath"));
+
 
         } else if (e.getSource() == gui.exit) {
             System.exit(0);

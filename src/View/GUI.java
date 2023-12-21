@@ -47,7 +47,7 @@ public class GUI extends JFrame {
     private final String gameTitle = "Black Jack";
     private final String cardBackFilePath = "src/Cards/Background/cardBack_blue2.png";
     private final String backgroundFilePath = "src/Background/background.jpg";
-    private final String rulesFilePath = "src/rules.txt";
+    private final String rulesFilePath = "src/rules.txt"; ////
 
     //Text with properties
     private String showPlayerNameText;
@@ -272,7 +272,7 @@ public class GUI extends JFrame {
 
 
     public void showRules() {
-        String rulesText = readRulesFromFile(rulesFilePath);
+        String rulesText = readRulesFromFile(LanguageManager.getMessage("rulesFilePath"));
 
         this.rulesText = new JTextArea(rulesText);
         this.rulesText.setEditable(false);
