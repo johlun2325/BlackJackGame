@@ -194,13 +194,11 @@ public class BlackJackLogic implements ActionListener {
     public void houseDrawCard() {
         house.drawCard(deckOfCards.dealCard());
         gui.updateHouseHandValue(house.getHandValue());
-        gui.playCardDealSound();
     }
 
     public void userDrawCard() {
         user.drawCard(deckOfCards.dealCard());
         gui.updateUserHandValue(user.getHandValue());
-        gui.playCardDealSound();
     }
 
     public void dealCardsAtStartOfRound() {

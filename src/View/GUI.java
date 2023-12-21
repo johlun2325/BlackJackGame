@@ -8,8 +8,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GUI extends JFrame {
-    private SoundPlayer soundPlayer =new SoundPlayer();
-
     public JButton newGame;
     public JButton noMoreCards;
     public JButton newCard;
@@ -274,9 +272,6 @@ public class GUI extends JFrame {
        instructions.setText(instruction);
     }
 
-    public void playCardDealSound(){
-        soundPlayer.playSound(soundPlayer.soundFileName);
-    }
 
 }
 
