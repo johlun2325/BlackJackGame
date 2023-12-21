@@ -15,11 +15,13 @@ public class BlackJackLogic implements ActionListener {
 
     private DeckOfCards deckOfCards;
     private GUI gui;
+    private Statistics stats; //lade till
     private final User user;
     private final House house;
     private String userName;
     private int currentBet;
     private int currentCapital;
+
 
 
     public BlackJackLogic() {
@@ -28,6 +30,7 @@ public class BlackJackLogic implements ActionListener {
         deckOfCards = new DeckOfCards();
         user = new User(userName, currentCapital);
         house = new House();
+        stats = new Statistics();
 
         gui = new GUI();
         gui.newGame.addActionListener(this);
@@ -169,20 +172,25 @@ public class BlackJackLogic implements ActionListener {
 
         if (userBust) {
             gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
+            stats.incrementLosses();// Lade till
             result = EndOfRound.LOSE;
         } else if (houseBust) {
             gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
             payOutWinnings();
+            stats.incrementWins();// Lade till
             result = EndOfRound.WIN;
         } else if (user.getHandValue() > house.getHandValue()) {
             gui.updateInstructions(Instructions.WON_ROUND.getInstruction());
             payOutWinnings();
+            stats.incrementWins();// Lade till
             result = EndOfRound.WIN;
         } else if (user.getHandValue() < house.getHandValue()) {
             gui.updateInstructions(Instructions.LOST_ROUND.getInstruction());
+            stats.incrementLosses();// Lade till
             result = EndOfRound.LOSE;
         } else {
             gui.updateInstructions(Instructions.DRAW_ROUND.getInstruction());
+            stats.incrementDraws();// Lade till
             result = EndOfRound.DRAW;
         }
         gui.setTotalCapital(user.getCurrentCapital());
