@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class GUI extends JFrame {
+
     public JButton newGame;
     public JButton noMoreCards;
     public JButton newCard;
@@ -19,7 +20,8 @@ public class GUI extends JFrame {
     private JLabel cardBackLabel;
     private JLabel totalCapital;
     private JLabel currentBet;
-    private JLabel name;
+    private JTextArea statistics;
+
     private JLabel instructions;
 
     private JLabel userHandValueText;
@@ -29,7 +31,7 @@ public class GUI extends JFrame {
     private JLabel houseHandValue;
 
     private JPanel buttonPanel;
-    protected JPanel userHandPanel;
+    private JPanel userHandPanel;
     private JPanel houseHandPanel;
     private JPanel betAndCapitalPanel;
     private JPanel centerPanel;
@@ -83,7 +85,7 @@ public class GUI extends JFrame {
         houseHandPanel.add(cardBackLabel);
         houseHandPanel.setOpaque(false);
 
-        betAndCapitalPanel.add(name);
+        betAndCapitalPanel.add(statistics);
         betAndCapitalPanel.add(totalCapital);
         betAndCapitalPanel.add(currentBet);
         betAndCapitalPanel.setOpaque(false);
@@ -133,9 +135,16 @@ public class GUI extends JFrame {
         cardBack = new ImageIcon("src/Cards/Background/cardBack_blue2.png");
         cardBackLabel = new JLabel(cardBack);
 
-        name = new JLabel("Player name: ");
-        name.setForeground(brightYellow);
-        name.setFont(labelFont);
+        userHandValueText = new JLabel("Player name: ");
+        userHandValueText.setForeground(brightYellow);
+        userHandValueText.setFont(labelFont);
+
+        statistics = new JTextArea("");
+        statistics.setForeground(brightYellow);
+        statistics.setFont(labelFont);
+        //statistics.setEditable(false);
+        statistics.setOpaque(false);
+       // statistics.setBorder(null);
 
         totalCapital = new JLabel("Total Capital: ");
         totalCapital.setForeground(brightYellow);
@@ -145,7 +154,7 @@ public class GUI extends JFrame {
         currentBet.setForeground(brightYellow);
         currentBet.setFont(labelFont);
 
-        houseHandValueText = new JLabel("Huset: ");
+        houseHandValueText = new JLabel("Huset ");
         houseHandValueText.setForeground(brightYellow);
         houseHandValueText.setFont(handValueFont);
         houseHandValue = new JLabel("");
@@ -154,7 +163,7 @@ public class GUI extends JFrame {
 
         emptySpace = new JLabel();
 
-        userHandValueText = new JLabel("Du: ");
+        userHandValueText = new JLabel();
         userHandValueText.setForeground(brightYellow);
         userHandValueText.setFont(handValueFont);
         userHandValue = new JLabel("");
@@ -231,7 +240,7 @@ public class GUI extends JFrame {
 
 
     public void setPlayerName(String userName) {
-        name.setText("Player: " + userName);
+        userHandValueText.setText(userName);
     }
 
 
@@ -270,6 +279,10 @@ public class GUI extends JFrame {
 
     public void updateInstructions(String instruction){
        instructions.setText(instruction);
+    }
+
+    public void updateStatistics(String statsSummary){
+        statistics.setText(statsSummary);
     }
 
 

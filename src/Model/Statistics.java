@@ -17,6 +17,7 @@ public class Statistics {
 
     public void incrementLosses() {
         losses++;
+        System.out.println(losses);
     }
 
     public void incrementDraws() {
@@ -37,7 +38,8 @@ public class Statistics {
 
 
     public String getStatsSummary() {
-        return "Vinster: " + wins + ", Förluster: " + losses + "Oavgjort: " + draws;
+        //return "Vinster: " + wins + "Förluster: " + losses + ", Oavgjort: " + draws;
+        return "Vinster: " + wins + "\nFörluster: " + losses + "\nOavgjort: " + draws;
     }
 }
 
