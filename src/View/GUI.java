@@ -47,7 +47,6 @@ public class GUI extends JFrame {
     private final String gameTitle = "Black Jack";
     private final String cardBackFilePath = "src/Cards/Background/cardBack_blue2.png";
     private final String backgroundFilePath = "src/Background/background.jpg";
-    private final String rulesFilePath = "src/rules.txt"; ////
 
     //Text with properties
     private String showPlayerNameText;
@@ -61,8 +60,6 @@ public class GUI extends JFrame {
     private String handValue;
     private String stopText;
     private String exitText;
-    private String instructionsText;
-
 
     public GUI() {
         LanguageManager.setLanguage("sv"); // setting initial language
@@ -84,7 +81,7 @@ public class GUI extends JFrame {
 
     public void setInitialTextToComponents() {
         rulesTitleText = LanguageManager.getMessage("rulesTitleText");
-        instructionsText = "";
+//        instructionsText = "";
 
         //labels
         showPlayerNameText = LanguageManager.getMessage("showPlayerNameText");
@@ -169,7 +166,7 @@ public class GUI extends JFrame {
 
     private void initiateComponents() {
 
-        instructionsText = "";
+//        instructionsText = "";
         //labels
         instructions = new JLabel("");
         currentBet = new JLabel(showCurrentBetText);
